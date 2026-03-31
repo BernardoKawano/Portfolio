@@ -1,0 +1,15 @@
+Fase 1 (fundacao) - concluida
+- [x] Documentos base criados em docs/
+- [x] Arquitetura i18n + tema implementada
+- [x] Home + paginas principais implementadas
+- [x] Validacao de lint/build/testes
+
+Fase 2 (refinamento) - concluida
+- [x] Escala tipografica e espacamento aplicados nas secoes principais
+- [x] Consistencia visual de cards, botoes e navegacao
+- [x] Copy bilingue orientada a valor e clareza operacional
+
+Fase 3 (polish) - concluida
+- [x] Motion sutil no Hero e transicoes de interacao
+- [x] Estrutura de estados e placeholders para evolucao de dados
+- [x] SEO basico por metadata e layout semantico
