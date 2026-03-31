@@ -3,10 +3,23 @@ import "./globals.css";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Bernardo Kawano | AI Engineer",
-  description:
-    "Premium portfolio focused on AI engineering, business automations, and operational systems.",
+  title: {
+    default: "Bernardo Kawano | AI Engineer",
+    template: "%s | Bernardo Kawano",
+  },
+  description: siteConfig.description,
   metadataBase: new URL(siteConfig.siteUrl),
+  openGraph: {
+    title: "Bernardo Kawano | AI Engineer",
+    description: siteConfig.description,
+    url: siteConfig.siteUrl,
+    siteName: "Bernardo Kawano",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -15,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" data-theme="light" className="h-full antialiased" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

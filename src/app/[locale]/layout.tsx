@@ -22,13 +22,22 @@ export async function generateMetadata({
   const locale = params.locale as Locale;
   const dictionary = getDictionary(locale);
   return {
-    title: `${dictionary.home.headline} | Bernardo Kawano`,
+    title: {
+      default: "Bernardo Kawano | AI Engineer",
+      template: "%s | Bernardo Kawano",
+    },
     description: dictionary.home.subheadline,
     openGraph: {
-      title: "Bernardo Kawano",
+      title: "Bernardo Kawano — AI Engineer",
       description: dictionary.home.subheadline,
       locale,
       type: "website",
+    },
+    alternates: {
+      languages: {
+        pt: "/pt",
+        en: "/en",
+      },
     },
   };
 }

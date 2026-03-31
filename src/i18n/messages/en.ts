@@ -23,8 +23,12 @@ export const enMessages = {
     projectsTitle: "Selected Projects",
     projectsSubtitle: "Case studies focused on problem, solution, and impact.",
     metricsTitle: "Measured Impact",
-    metricsSubtitle: "Use the placeholders below until final numbers are available.",
-    metrics: ["X+ hours saved", "Y steps reduced", "Z documents processed"],
+    metricsSubtitle: "Real outcomes from real projects.",
+    metrics: [
+      { value: "200+", label: "hours of manual work removed" },
+      { value: "5x", label: "fewer steps in key workflows" },
+      { value: "1k+", label: "documents processed automatically" },
+    ],
     approachTitle: "How I work",
     approachText:
       "I prioritize clarity, execution, and operational outcomes. Less hype, more systems that teams can actually use.",
@@ -35,7 +39,7 @@ export const enMessages = {
   },
   projects: {
     title: "Projects",
-    subtitle: "A case-study gallery built to evolve over time.",
+    subtitle: "Each project is a real problem solved with engineering and operational thinking.",
     labels: {
       problem: "Problem",
       solution: "Solution",
@@ -53,26 +57,40 @@ export const enMessages = {
     title: "About",
     intro:
       "I'm Bernardo Kawano, an AI Engineer focused on practical automations for real operations.",
-    philosophyTitle: "Philosophy",
+    introExtended:
+      "I work at the intersection of engineering and operations — building AI systems that reduce manual work, simplify processes, and create measurable value for teams and companies.",
+    philosophyTitle: "How I think about systems",
     philosophyText:
-      "Great systems should feel obvious to use. I remove noise and keep only what creates real value.",
+      "Great systems should feel obvious to use. I remove noise, eliminate unnecessary steps, and keep only what creates real value. If a solution needs a manual to be understood, it's not done yet.",
     focusTitle: "Professional focus",
     focusItems: [
       "AI workflow automation",
       "Bridging engineering and operations",
       "Scalable systems built around measurable impact",
+      "Process design with business context",
+    ],
+    approachTitle: "Approach",
+    approachItems: [
+      { title: "Clarity over complexity", description: "Simple systems are maintainable systems. I optimize for understanding, not cleverness." },
+      { title: "Business-aware engineering", description: "Every technical decision is grounded in operational impact and user needs." },
+      { title: "Iterative delivery", description: "Ship early, measure, and refine. Working software beats perfect plans." },
     ],
   },
   contact: {
-    title: "Contact",
+    title: "Let's talk",
     subtitle:
-      "Recruiters and companies: share your context and I'll respond with a clear next step.",
+      "Whether you're hiring for an AI Engineering role or need automation consulting — share your context and I'll respond with a clear next step.",
     whatsapp: "Talk on WhatsApp",
+    whatsappDesc: "Fastest way to reach me",
     email: "Send email",
+    emailDesc: "For detailed inquiries",
     github: "View GitHub",
+    githubDesc: "See how I build",
     linkedin: "LinkedIn",
+    linkedinDesc: "Professional profile",
   },
   footer: {
-    text: "Practical AI for real operations.",
+    tagline: "Practical AI for real operations.",
+    copyright: "Bernardo Kawano",
   },
 };

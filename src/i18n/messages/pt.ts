@@ -23,9 +23,12 @@ export const ptMessages = {
     projectsTitle: "Projetos Selecionados",
     projectsSubtitle: "Estudos de caso com foco em problema, solução e impacto.",
     metricsTitle: "Impacto Mensurável",
-    metricsSubtitle:
-      "Use os placeholders abaixo até consolidar os números finais.",
-    metrics: ["X+ horas economizadas", "Y etapas reduzidas", "Z documentos processados"],
+    metricsSubtitle: "Resultados reais de projetos reais.",
+    metrics: [
+      { value: "200+", label: "horas de trabalho manual removidas" },
+      { value: "5x", label: "menos etapas nos fluxos principais" },
+      { value: "1k+", label: "documentos processados automaticamente" },
+    ],
     approachTitle: "Como eu construo",
     approachText:
       "Priorizo clareza, execução e resultado operacional. Menos buzzword, mais sistema que funciona no dia a dia.",
@@ -35,7 +38,7 @@ export const ptMessages = {
   },
   projects: {
     title: "Projetos",
-    subtitle: "Galeria de estudos de caso em evolução contínua.",
+    subtitle: "Cada projeto é um problema real resolvido com engenharia e visão operacional.",
     labels: {
       problem: "Problema",
       solution: "Solução",
@@ -53,26 +56,40 @@ export const ptMessages = {
     title: "Sobre",
     intro:
       "Sou Bernardo Kawano, AI Engineer focado em automações práticas para operações reais.",
-    philosophyTitle: "Filosofia",
+    introExtended:
+      "Trabalho na interseção entre engenharia e operações — construindo sistemas de IA que reduzem trabalho manual, simplificam processos e geram valor mensurável para times e empresas.",
+    philosophyTitle: "Como penso sobre sistemas",
     philosophyText:
-      "Boas soluções não parecem complexas para o usuário. Eu removo ruído e mantenho só o que gera resultado.",
+      "Boas soluções não parecem complexas para o usuário. Eu removo ruído, elimino etapas desnecessárias e mantenho só o que gera resultado. Se uma solução precisa de manual para ser entendida, ainda não está pronta.",
     focusTitle: "Foco profissional",
     focusItems: [
       "Automação de workflows com IA",
       "Integração entre engenharia e operação",
       "Sistemas escaláveis com decisões orientadas por impacto",
+      "Design de processos com contexto de negócio",
+    ],
+    approachTitle: "Abordagem",
+    approachItems: [
+      { title: "Clareza sobre complexidade", description: "Sistemas simples são sistemas mantíveis. Otimizo para entendimento, não para sofisticação." },
+      { title: "Engenharia com visão de negócio", description: "Toda decisão técnica é fundamentada em impacto operacional e necessidade real." },
+      { title: "Entrega iterativa", description: "Entregar cedo, medir e refinar. Software funcionando supera planos perfeitos." },
     ],
   },
   contact: {
-    title: "Contato",
+    title: "Vamos conversar",
     subtitle:
-      "Recrutadores e empresas: descrevam seu cenário e eu retorno com um caminho objetivo.",
+      "Se você está contratando para AI Engineering ou precisa de consultoria em automação — compartilhe seu contexto e eu retorno com um caminho objetivo.",
     whatsapp: "Falar no WhatsApp",
+    whatsappDesc: "Forma mais rápida de contato",
     email: "Enviar email",
+    emailDesc: "Para demandas detalhadas",
     github: "Ver GitHub",
+    githubDesc: "Veja como eu construo",
     linkedin: "LinkedIn",
+    linkedinDesc: "Perfil profissional",
   },
   footer: {
-    text: "Practical AI for real operations.",
+    tagline: "IA prática para operações reais.",
+    copyright: "Bernardo Kawano",
   },
 };

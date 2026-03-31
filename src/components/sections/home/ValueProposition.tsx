@@ -1,22 +1,52 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/Card";
+
 type ValuePropositionProps = {
   dictionary: Record<string, any>;
 };
 
 export function ValueProposition({ dictionary }: ValuePropositionProps) {
   return (
-    <section className="section-shell py-12 md:py-16">
-      <div className="premium-card p-8 md:p-10">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+    <section className="section-shell py-section-sm md:py-section-md">
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <h2 className="text-h2 tracking-tight">
           {dictionary.home.valueTitle}
         </h2>
-        <ul className="mt-6 grid gap-4 md:grid-cols-3">
-          {dictionary.home.valueItems.map((item: string) => (
-            <li key={item} className="text-sm leading-7 text-fg-secondary md:text-base">
-              {item}
-            </li>
+        <motion.ul
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+          variants={{
+            hidden: { opacity: 1 },
+            show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+          }}
+          className="mt-8 grid gap-4 md:grid-cols-3"
+        >
+          {dictionary.home.valueItems.map((item: string, i: number) => (
+            <motion.li
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                show: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.28 }}
+            >
+              <Card className="h-full p-6 md:p-7">
+                <p className="text-body leading-relaxed text-fg-secondary">
+                  {item}
+                </p>
+              </Card>
+            </motion.li>
           ))}
-        </ul>
-      </div>
+        </motion.ul>
+      </motion.div>
     </section>
   );
 }

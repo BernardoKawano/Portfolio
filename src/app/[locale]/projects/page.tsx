@@ -14,68 +14,101 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
   const labels = dictionary.projects.labels;
 
   return (
-    <section className="section-shell py-14 md:py-20">
-      <header className="mb-10 max-w-3xl">
-        <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-          {dictionary.projects.title}
-        </h1>
-        <p className="mt-3 text-fg-secondary">{dictionary.projects.subtitle}</p>
+    <div className="section-shell py-section-md md:py-section-lg">
+      <header className="mb-section-sm max-w-3xl">
+        <h1 className="text-h1 tracking-tight">{dictionary.projects.title}</h1>
+        <p className="mt-3 text-body text-fg-secondary">
+          {dictionary.projects.subtitle}
+        </p>
       </header>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {projects.map((project) => (
-          <article key={project.id} id={project.id} className="premium-card p-7 md:p-9">
-            <h2 className="text-2xl font-semibold">{project.title}</h2>
-            <p className="mt-3 text-fg-secondary">{project.summary}</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide">{labels.problem}</h3>
-                <p className="mt-2 text-sm text-fg-secondary">{project.problem}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide">{labels.solution}</h3>
-                <p className="mt-2 text-sm text-fg-secondary">{project.solution}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide">{labels.architecture}</h3>
-                <p className="mt-2 text-sm text-fg-secondary">{project.architecture}</p>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide">{labels.process}</h3>
-                <p className="mt-2 text-sm text-fg-secondary">{project.process}</p>
-              </div>
-            </div>
-            <div className="mt-5">
-              <h3 className="text-sm font-semibold uppercase tracking-wide">{labels.stack}</h3>
-              <div className="mt-2 flex flex-wrap gap-2">
+          <article
+            key={project.id}
+            id={project.id}
+            className="premium-card overflow-hidden"
+          >
+            <div className="border-b border-line-subtle p-7 md:p-9">
+              <h2 className="text-h2 tracking-tight">{project.title}</h2>
+              <p className="mt-3 max-w-3xl text-body text-fg-secondary">
+                {project.summary}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
                 {project.stack.map((item) => (
                   <span
                     key={`${project.id}-${item}`}
-                    className="rounded-full border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
+                    className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
                   >
                     {item}
                   </span>
                 ))}
               </div>
             </div>
-            <p className="mt-5 text-sm font-semibold">{`${labels.impact}: ${project.impact}`}</p>
-            <div className="mt-5 flex flex-wrap gap-4 text-sm font-medium">
-              <Link href={`/${locale}/projects#${project.id}`} className="underline">
-                {labels.caseStudy}
-              </Link>
-              {project.links.github ? (
-                <Link href={project.links.github} className="underline">
-                  {labels.github}
-                </Link>
-              ) : null}
-              {project.links.demo ? (
-                <Link href={project.links.demo} className="underline">
-                  {labels.demo}
-                </Link>
-              ) : null}
+            <div className="grid gap-px bg-line-subtle md:grid-cols-2">
+              <div className="bg-bg-surface p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                  {labels.problem}
+                </h3>
+                <p className="mt-3 text-caption text-fg-secondary">
+                  {project.problem}
+                </p>
+              </div>
+              <div className="bg-bg-surface p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                  {labels.solution}
+                </h3>
+                <p className="mt-3 text-caption text-fg-secondary">
+                  {project.solution}
+                </p>
+              </div>
+              <div className="bg-bg-surface p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                  {labels.architecture}
+                </h3>
+                <p className="mt-3 font-mono text-xs text-fg-secondary">
+                  {project.architecture}
+                </p>
+              </div>
+              <div className="bg-bg-surface p-6 md:p-7">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                  {labels.process}
+                </h3>
+                <p className="mt-3 text-caption text-fg-secondary">
+                  {project.process}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 border-t border-line-subtle p-7 md:flex-row md:items-center md:justify-between md:p-9">
+              <p className="text-caption font-semibold">
+                <span className="text-fg-muted">{labels.impact}:</span>{" "}
+                {project.impact}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {project.links.github ? (
+                  <Link
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-pill border border-line-subtle px-4 py-2 text-xs font-semibold transition-colors duration-fast hover:border-fg-muted"
+                  >
+                    {labels.github}
+                  </Link>
+                ) : null}
+                {project.links.demo ? (
+                  <Link
+                    href={project.links.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-pill border border-line-subtle px-4 py-2 text-xs font-semibold transition-colors duration-fast hover:border-fg-muted"
+                  >
+                    {labels.demo}
+                  </Link>
+                ) : null}
+              </div>
             </div>
           </article>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

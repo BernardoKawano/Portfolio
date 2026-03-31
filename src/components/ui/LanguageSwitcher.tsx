@@ -1,7 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { locales, type Locale } from "@/lib/i18n";
 
 type LanguageSwitcherProps = {
@@ -27,15 +26,21 @@ export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
   }
 
   return (
-    <div className="inline-flex rounded-full border border-line-subtle p-1">
+    <div
+      className="inline-flex rounded-pill border border-line-subtle p-0.5"
+      role="radiogroup"
+      aria-label="Language"
+    >
       {locales.map((lang) => {
         const active = locale === lang;
         return (
           <button
             type="button"
             key={lang}
+            role="radio"
+            aria-checked={active}
             onClick={() => handleLocaleChange(lang)}
-            className={`rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide transition-all ${
+            className={`rounded-pill px-2.5 py-1 text-xs font-medium uppercase tracking-wide transition-all duration-base ease-premium ${
               active
                 ? "bg-accent-primary text-accent-contrast"
                 : "text-fg-secondary hover:text-fg-primary"

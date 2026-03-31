@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-primary: "Gotham", "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+  --font-primary: "Gotham", "Inter", "Manrope", system-ui, -apple-system,
+    sans-serif;
   --color-bg-primary: #f7f7f6;
   --color-bg-surface: #ffffff;
   --color-fg-primary: #121212;
@@ -39,6 +40,8 @@ body {
   background: var(--color-bg-primary);
   color: var(--color-fg-primary);
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .section-shell {
@@ -49,4 +52,15 @@ body {
   background: var(--color-bg-surface);
   border: 1px solid var(--color-line-subtle);
   border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .premium-card {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+}
+
+@layer base {
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-primary ring-offset-2 ring-offset-bg-primary;
+  }
 }
