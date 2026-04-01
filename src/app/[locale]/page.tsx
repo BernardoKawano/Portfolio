@@ -3,7 +3,7 @@ import { Hero } from "@/components/sections/home/Hero";
 import { ValueProposition } from "@/components/sections/home/ValueProposition";
 import { FeaturedProjects } from "@/components/sections/home/FeaturedProjects";
 import { ImpactMetrics } from "@/components/sections/home/ImpactMetrics";
-import { Approach } from "@/components/sections/home/Approach";
+import { ProcessJourney } from "@/components/sections/home/ProcessJourney";
 import { FinalCTA } from "@/components/sections/home/FinalCTA";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
@@ -22,7 +22,7 @@ export default function HomePage({ params }: HomePageProps) {
       <ValueProposition dictionary={dictionary} />
       <FeaturedProjects locale={locale} dictionary={dictionary} />
       <ImpactMetrics dictionary={dictionary} />
-      <Approach dictionary={dictionary} />
+      <ProcessJourney dictionary={dictionary} />
       <FinalCTA dictionary={dictionary} />
     </>
   );

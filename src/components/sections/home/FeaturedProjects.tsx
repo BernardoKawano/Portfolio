@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { projects } from "@/content/projects";
+import {
+  isLocalizedProject,
+  projects,
+  resolveProjectCopy,
+  type ProjectLocaleItems,
+} from "@/content/projects";
 import { Card } from "@/components/ui/Card";
 import type { Locale } from "@/lib/i18n";
 
@@ -16,6 +21,9 @@ export function FeaturedProjects({
   dictionary,
 }: FeaturedProjectsProps) {
   const featured = projects.filter((p) => p.featured).slice(0, 3);
+  const projectItems = dictionary.projects?.items as
+    | Partial<ProjectLocaleItems>
+    | undefined;
 
   return (
     <section className="section-shell py-section-md md:py-section-lg">
@@ -43,42 +51,66 @@ export function FeaturedProjects({
         }}
         className="grid gap-5 md:grid-cols-3"
       >
-        {featured.map((project) => (
-          <Card
-            key={project.id}
-            hover
-            variants={{
-              hidden: { opacity: 0, y: 16 },
-              show: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col p-6 md:p-7"
-          >
-            <h3 className="text-h3 font-semibold">{project.title}</h3>
-            <p className="mt-3 flex-1 text-caption leading-relaxed text-fg-secondary">
-              {project.summary}
-            </p>
-            <p className="mt-5 text-caption font-medium text-fg-primary">
-              {project.impact}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.stack.map((item) => (
-                <span
-                  key={`${project.id}-${item}`}
-                  className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-            <Link
-              href={`/${locale}/projects#${project.id}`}
-              className="mt-6 inline-block text-caption font-semibold underline decoration-line-subtle underline-offset-4 transition-colors duration-fast hover:decoration-fg-muted"
+        {featured.map((project) => {
+          const copy = resolveProjectCopy(
+            project,
+            isLocalizedProject(project) ? projectItems : undefined
+          );
+          const logo = project.logo;
+          return (
+            <Card
+              key={project.id}
+              hover
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                show: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col p-6 md:p-7"
             >
-              {dictionary.projects.labels.caseStudy}
-            </Link>
-          </Card>
-        ))}
+              {logo ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt=""
+                    width={176}
+                    height={40}
+                    aria-hidden
+                    className="h-9 w-auto max-w-[min(100%,12.5rem)] shrink-0 object-contain object-left dark:brightness-0 dark:invert"
+                  />
+                  <h3 className="sr-only">
+                    {copy.wordmark ? `${copy.wordmark} (${copy.title})` : copy.title}
+                  </h3>
+                </>
+              ) : (
+                <h3 className="text-h3 font-semibold">{copy.title}</h3>
+              )}
+              <p className="mt-3 flex-1 text-caption leading-relaxed text-fg-secondary">
+                {copy.summary}
+              </p>
+              <p className="mt-5 text-caption font-medium text-fg-primary">
+                {copy.impact}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.stack.map((item) => (
+                  <span
+                    key={`${project.id}-${item}`}
+                    className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href={`/${locale}/projects#${project.id}`}
+                className="mt-6 inline-block text-caption font-semibold underline decoration-line-subtle underline-offset-4 transition-colors duration-fast hover:decoration-fg-muted"
+              >
+                {dictionary.projects.labels.caseStudy}
+              </Link>
+            </Card>
+          );
+        })}
       </motion.div>
     </section>
   );

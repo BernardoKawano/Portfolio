@@ -1,22 +1,99 @@
-export type Project = {
-  id: string;
-  featured: boolean;
+export type ProjectCopy = {
   title: string;
+  /** Wordmark next to the logo (e.g. "Luma Lector") */
+  wordmark?: string;
   summary: string;
-  stack: string[];
   impact: string;
   problem: string;
   solution: string;
   architecture: string;
   process: string;
-  links: {
-    caseStudy: string;
-    github?: string;
-    demo?: string;
-  };
 };
 
+export type ProjectLogo = {
+  src: string;
+};
+
+export type ProjectLinks = {
+  caseStudy: string;
+  github?: string;
+  demo?: string;
+};
+
+export type LocalizedProject = {
+  id: string;
+  featured: boolean;
+  localeKey: string;
+  stack: string[];
+  links: ProjectLinks;
+  logo?: ProjectLogo;
+};
+
+export type StaticProject = ProjectCopy & {
+  id: string;
+  featured: boolean;
+  stack: string[];
+  links: ProjectLinks;
+  logo?: ProjectLogo;
+};
+
+export type Project = StaticProject | LocalizedProject;
+
+/** Keys mirrored under `projects.items` in pt/en message files */
+export type ProjectLocaleItems = {
+  lumalector: ProjectCopy;
+};
+
+export function isLocalizedProject(project: Project): project is LocalizedProject {
+  return "localeKey" in project && Boolean(project.localeKey);
+}
+
+export function resolveProjectCopy(
+  project: Project,
+  items: Partial<ProjectLocaleItems> | undefined
+): ProjectCopy {
+  if (isLocalizedProject(project)) {
+    const row = items?.[project.localeKey as keyof ProjectLocaleItems];
+    if (!row) {
+      throw new Error(`Missing projects.items.${project.localeKey} for locale bundle`);
+    }
+    return row;
+  }
+  return {
+    title: project.title,
+    wordmark: project.wordmark,
+    summary: project.summary,
+    impact: project.impact,
+    problem: project.problem,
+    solution: project.solution,
+    architecture: project.architecture,
+    process: project.process,
+  };
+}
+
 export const projects: Project[] = [
+  {
+    id: "lumalector",
+    featured: true,
+    localeKey: "lumalector",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Auth.js",
+      "Zustand",
+      "FastAPI",
+    ],
+    logo: {
+      src: "/images/luma-lector-logotipo.png",
+    },
+    links: {
+      caseStudy: "/pt/projects#lumalector",
+      github: "",
+      demo: "",
+    },
+  },
   {
     id: "ops-ai-triage",
     featured: true,

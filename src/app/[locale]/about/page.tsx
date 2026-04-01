@@ -52,6 +52,27 @@ export default function AboutPage({ params }: AboutPageProps) {
 
       <section className="mt-section-sm md:mt-section-md">
         <h2 className="text-h2 tracking-tight">
+          {dictionary.about.inspirationsTitle}
+        </h2>
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {dictionary.about.inspirations.map(
+            (item: { author: string; quote: string; insight: string }) => (
+              <article key={item.author} className="premium-card p-6 md:p-7">
+                <p className="text-caption font-semibold uppercase tracking-wide text-fg-secondary">
+                  {item.author}
+                </p>
+                <blockquote className="mt-3 text-body-lg leading-relaxed text-fg-primary">
+                  &ldquo;{item.quote}&rdquo;
+                </blockquote>
+                <p className="mt-3 text-body text-fg-secondary">{item.insight}</p>
+              </article>
+            ),
+          )}
+        </div>
+      </section>
+
+      <section className="mt-section-sm md:mt-section-md">
+        <h2 className="text-h2 tracking-tight">
           {dictionary.about.approachTitle}
         </h2>
         <div className="mt-6 grid gap-5 md:grid-cols-3">
