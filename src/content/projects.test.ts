@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { enMessages } from "@/i18n/messages/en";
+import { ptMessages } from "@/i18n/messages/pt";
 import { getDictionary } from "@/lib/i18n";
 import {
   projects,
@@ -27,10 +29,81 @@ describe("resolveProjectCopy", () => {
     expect(copy.impact.toLowerCase()).toMatch(/2|40|hour/);
   });
 
+  it("returns Portuguese copy for Luma Gestor from pt dictionary items", () => {
+    const gestor = projects.find((p) => p.id === "lumagestor");
+    expect(gestor).toBeDefined();
+    const items = getDictionary("pt").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(gestor!, items);
+    expect(copy.summary.toLowerCase()).toMatch(/kanban|pdf|obra/);
+    expect(copy.wordmark).toBe("Luma Gestor");
+    expect(copy.architecture.toLowerCase()).toContain("vite");
+    expect(copy.details?.length).toBeGreaterThan(100);
+    expect(copy.attributions?.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("returns English copy for Luma Gestor from en dictionary items", () => {
+    const gestor = projects.find((p) => p.id === "lumagestor");
+    const items = getDictionary("en").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(gestor!, items);
+    expect(copy.summary.toLowerCase()).toMatch(/kanban|pdf|project/);
+    expect(copy.architecture.toLowerCase()).toContain("vite");
+  });
+
+  it("returns Portuguese copy for Tech Challange 2 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-2");
+    expect(project).toBeDefined();
+    const items = getDictionary("pt").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("suprimentos medicos");
+    expect(copy.summary.toLowerCase()).toContain("algoritmo genetico");
+    expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("returns English copy for Tech Challange 2 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-2");
+    expect(project).toBeDefined();
+    const items = getDictionary("en").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("route optimization");
+    expect(copy.process.toLowerCase()).toContain("folium");
+  });
+
+  it("exposes Luma Gestor walkthrough labels in pt and en", () => {
+    expect(ptMessages.projects.lumaGestorWalkthrough.sceneLabels).toHaveLength(3);
+    expect(enMessages.projects.lumaGestorWalkthrough.sceneLabels).toHaveLength(3);
+    expect(ptMessages.projects.lumaGestorWalkthrough.wizard.step1.length).toBeGreaterThan(2);
+    expect(ptMessages.projects.lumaGestorWalkthrough.controls.autoplay.length).toBeGreaterThan(3);
+  });
+
+  it("exposes Luma Lector demo controls in pt and en", () => {
+    expect(ptMessages.projects.lumaDemos.controls.selectSceneHint.length).toBeGreaterThan(10);
+    expect(enMessages.projects.lumaDemos.controls.autoplay).toBe("Autoplay");
+  });
+
+  it("exposes Tech Challange 2 walkthrough labels in pt and en", () => {
+    expect(ptMessages.projects.techChallenge2Walkthrough.sceneLabels).toHaveLength(5);
+    expect(enMessages.projects.techChallenge2Walkthrough.sceneLabels).toHaveLength(5);
+    expect(ptMessages.projects.techChallenge2Walkthrough.tabs.live).toBe("Ao vivo");
+  });
+
   it("returns inline copy for static projects", () => {
     const staticProject = projects.find((p) => p.id === "ops-ai-triage");
     expect(staticProject).toBeDefined();
     const copy = resolveProjectCopy(staticProject!, undefined);
     expect(copy.title).toBe("AI Ops Triage Pipeline");
+  });
+
+  it("keeps external links configured for Tech Challange 2", () => {
+    const project = projects.find((p) => p.id === "tech-challange-2");
+    expect(project).toBeDefined();
+    expect(project?.featured).toBe(true);
+    expect(project?.links.github).toBe(
+      "https://github.com/BernardoKawano/Tech-Challange-2"
+    );
+    expect(project?.links.demo).toBe("https://youtu.be/kWew_1jsQjQ");
   });
 });

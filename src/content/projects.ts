@@ -1,3 +1,8 @@
+export type ProjectAttribution = {
+  role: string;
+  credit: string;
+};
+
 export type ProjectCopy = {
   title: string;
   /** Wordmark next to the logo (e.g. "Luma Lector") */
@@ -8,6 +13,10 @@ export type ProjectCopy = {
   solution: string;
   architecture: string;
   process: string;
+  /** Texto longo no case study (âncora #id na página de projetos) */
+  details?: string;
+  /** Papéis e créditos ligados ao projeto */
+  attributions?: readonly ProjectAttribution[];
 };
 
 export type ProjectLogo = {
@@ -42,6 +51,8 @@ export type Project = StaticProject | LocalizedProject;
 /** Keys mirrored under `projects.items` in pt/en message files */
 export type ProjectLocaleItems = {
   lumalector: ProjectCopy;
+  lumagestor: ProjectCopy;
+  "tech-challange-2": ProjectCopy;
 };
 
 export function isLocalizedProject(project: Project): project is LocalizedProject {
@@ -92,6 +103,58 @@ export const projects: Project[] = [
       caseStudy: "/pt/projects#lumalector",
       github: "",
       demo: "",
+    },
+  },
+  {
+    id: "lumagestor",
+    featured: true,
+    localeKey: "lumagestor",
+    stack: [
+      "Vite 7",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "React Router 7",
+      "React PDF",
+    ],
+    logo: {
+      src: "/images/logo-luma-gestor.png",
+    },
+    links: {
+      caseStudy: "/pt/projects#lumagestor",
+      github: "",
+      demo: "",
+    },
+  },
+  {
+    id: "tech-challange-2",
+    featured: true,
+    localeKey: "tech-challange-2",
+    stack: [
+      "Python 3.8+",
+      "NumPy",
+      "DEAP",
+      "Pygame",
+      "Folium",
+      "Matplotlib",
+      "Plotly",
+      "Seaborn",
+      "Ollama (llama2)",
+      "Streamlit",
+      "Pandas",
+      "Geopy",
+      "OSMnx",
+      "NetworkX",
+      "Pytest",
+      "Black",
+      "Flake8",
+      "Pylint",
+      "MyPy",
+    ],
+    links: {
+      caseStudy: "/pt/projects#tech-challange-2",
+      github: "https://github.com/BernardoKawano/Tech-Challange-2",
+      demo: "https://youtu.be/kWew_1jsQjQ",
     },
   },
   {

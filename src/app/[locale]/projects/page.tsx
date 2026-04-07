@@ -7,9 +7,17 @@ import {
   type ProjectLocaleItems,
 } from "@/content/projects";
 import {
+  LumaGestorWalkthroughSection,
+  type LumaGestorWalkthroughLabels,
+} from "@/components/projects/luma/LumaGestorWalkthrough";
+import {
   LumaProductDemosSection,
   type LumaProductDemosLabels,
 } from "@/components/projects/luma/LumaProductDemos";
+import {
+  TechChallenge2WalkthroughSection,
+  type TechChallenge2WalkthroughLabels,
+} from "@/components/projects/tech/TechChallenge2Walkthrough";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
 type ProjectsPageProps = {
@@ -20,7 +28,10 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale as Locale;
   const dictionary = getDictionary(locale);
-  const labels = dictionary.projects.labels;
+  const labels = dictionary.projects.labels as typeof dictionary.projects.labels & {
+    detailsHeading?: string;
+    attributionsHeading?: string;
+  };
   const projectItems = dictionary.projects.items as
     | Partial<ProjectLocaleItems>
     | undefined;
@@ -114,11 +125,60 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   </p>
                 </div>
               </div>
+              {copy.details ? (
+                <div className="border-t border-line-subtle bg-bg-primary/15 p-7 md:p-9 dark:bg-bg-primary/25">
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                    {labels.detailsHeading ?? "Detalhes"}
+                  </h3>
+                  <p className="mt-4 max-w-3xl whitespace-pre-wrap text-caption leading-relaxed text-fg-secondary">
+                    {copy.details}
+                  </p>
+                </div>
+              ) : null}
+              {copy.attributions && copy.attributions.length > 0 ? (
+                <div className="border-t border-line-subtle p-7 md:p-9">
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
+                    {labels.attributionsHeading ?? "Atribuições"}
+                  </h3>
+                  <ul className="mt-4 max-w-3xl space-y-4">
+                    {copy.attributions.map((row) => (
+                      <li key={row.role}>
+                        <p className="text-caption font-semibold text-fg-primary">{row.role}</p>
+                        <p className="mt-1 text-caption leading-relaxed text-fg-secondary">
+                          {row.credit}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {project.id === "lumagestor" ? (
+                <LumaGestorWalkthroughSection
+                  labels={
+                    (
+                      dictionary.projects as {
+                        lumaGestorWalkthrough: LumaGestorWalkthroughLabels;
+                      }
+                    ).lumaGestorWalkthrough
+                  }
+                />
+              ) : null}
               {project.id === "lumalector" ? (
                 <LumaProductDemosSection
                   labels={
                     (dictionary.projects as { lumaDemos: LumaProductDemosLabels })
                       .lumaDemos
+                  }
+                />
+              ) : null}
+              {project.id === "tech-challange-2" ? (
+                <TechChallenge2WalkthroughSection
+                  labels={
+                    (
+                      dictionary.projects as {
+                        techChallenge2Walkthrough: TechChallenge2WalkthroughLabels;
+                      }
+                    ).techChallenge2Walkthrough
                   }
                 />
               ) : null}

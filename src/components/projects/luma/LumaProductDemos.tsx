@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   CalendarPlus,
@@ -10,6 +10,8 @@ import {
   Download,
   FileText,
   Loader2,
+  Pause,
+  Play,
   Plus,
   Printer,
   Upload,
@@ -120,11 +122,18 @@ export type LumaCalendarDemoLabels = {
 export type LumaProductDemosLabels = {
   sectionTitle: string;
   sectionSubtitle: string;
+  controls: {
+    autoplay: string;
+    autoplayHint: string;
+    selectSceneHint: string;
+  };
   noteImportCalendar: string;
   notePrintBook: string;
   analysis: LumaAnalysisDemoLabels;
   calendar: LumaCalendarDemoLabels;
 };
+
+const LUMA_LECTOR_AUTOPLAY_MS = 8000;
 
 /** r = receita (verde), x = despesa (vermelho); um dia pode ter ambos */
 const calendarDays = [
@@ -959,8 +968,28 @@ function CalendarDemo({ labels }: { labels: LumaCalendarDemoLabels }) {
 }
 
 export function LumaProductDemosSection({ labels }: { labels: LumaProductDemosLabels }) {
+  const [scene, setScene] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+
+  useEffect(() => {
+    if (!autoplay) return undefined;
+    const t = setInterval(() => setScene((s) => (s + 1) % 2), LUMA_LECTOR_AUTOPLAY_MS);
+    return () => clearInterval(t);
+  }, [autoplay]);
+
+  const onSelectScene = useCallback((index: number) => {
+    setScene(index);
+  }, []);
+
+  const sceneIcons = [FileText, CalendarPlus] as const;
+  const sceneTitles = [labels.analysis.chrome, labels.calendar.chrome] as const;
+
   return (
-    <div className="border-t border-line-subtle bg-bg-primary/25 p-7 md:p-9 dark:bg-bg-primary/40">
+    <div
+      className="border-t border-line-subtle bg-bg-primary/25 p-7 md:p-9 dark:bg-bg-primary/40"
+      role="region"
+      aria-label={labels.sectionTitle}
+    >
       <h3 className="text-h3 font-semibold tracking-tight text-fg-primary">
         {labels.sectionTitle}
       </h3>
@@ -969,9 +998,80 @@ export function LumaProductDemosSection({ labels }: { labels: LumaProductDemosLa
         <p>{labels.noteImportCalendar}</p>
         <p>{labels.notePrintBook}</p>
       </div>
-      <div className="mt-10 grid gap-10 lg:grid-cols-2">
-        <AnalysisDemo labels={labels.analysis} />
-        <CalendarDemo labels={labels.calendar} />
+
+      <div className="mt-6 flex flex-col gap-3 border-t border-line-subtle/80 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+        <div className="min-w-0 flex-1">
+          <p className="mb-2.5 text-caption text-fg-secondary">{labels.controls.selectSceneHint}</p>
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label={labels.sectionTitle}>
+            {sceneTitles.map((label, i) => {
+              const Icon = sceneIcons[i];
+              const selected = scene === i;
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  onClick={() => onSelectScene(i)}
+                  className={cn(
+                    "inline-flex max-w-full items-center gap-1.5 rounded-pill border px-3 py-1.5 text-left text-xs transition-colors duration-fast",
+                    selected
+                      ? "border-fg-primary bg-bg-surface font-semibold text-fg-primary shadow-sm ring-1 ring-fg-primary/15"
+                      : "border-line-subtle text-fg-muted hover:border-fg-muted hover:text-fg-secondary"
+                  )}
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  <span className="min-w-0 truncate sm:whitespace-normal sm:truncate">{label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex w-full shrink-0 flex-col gap-1.5 sm:w-auto sm:max-w-xs sm:items-end">
+          <button
+            type="button"
+            onClick={() => setAutoplay((a) => !a)}
+            title={labels.controls.autoplayHint}
+            className={cn(
+              "inline-flex w-full items-center justify-center gap-2 rounded-pill border px-4 py-2 text-xs font-semibold transition-colors duration-fast sm:w-auto sm:justify-center",
+              autoplay
+                ? "border-fg-primary bg-bg-surface text-fg-primary shadow-sm"
+                : "border-line-subtle bg-bg-surface/60 text-fg-secondary hover:border-fg-muted"
+            )}
+            aria-pressed={autoplay}
+          >
+            {autoplay ? (
+              <Pause className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            ) : (
+              <Play className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            )}
+            {labels.controls.autoplay}
+          </button>
+          <p className="text-center text-[10px] leading-snug text-fg-muted sm:text-right">
+            {labels.controls.autoplayHint}
+          </p>
+        </div>
+      </div>
+
+      <div className="relative mt-8 overflow-hidden rounded-2xl">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(59,130,246,0.06),transparent_50%)]"
+          aria-hidden
+        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={scene}
+            role="tabpanel"
+            initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-4xl"
+          >
+            {scene === 0 ? <AnalysisDemo labels={labels.analysis} /> : null}
+            {scene === 1 ? <CalendarDemo labels={labels.calendar} /> : null}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

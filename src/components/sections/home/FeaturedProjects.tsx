@@ -20,7 +20,7 @@ export function FeaturedProjects({
   locale,
   dictionary,
 }: FeaturedProjectsProps) {
-  const featured = projects.filter((p) => p.featured).slice(0, 3);
+  const featured = projects.filter((p) => p.featured);
   const projectItems = dictionary.projects?.items as
     | Partial<ProjectLocaleItems>
     | undefined;
@@ -49,14 +49,19 @@ export function FeaturedProjects({
           hidden: { opacity: 1 },
           show: { opacity: 1, transition: { staggerChildren: 0.1 } },
         }}
-        className="grid gap-5 md:grid-cols-3"
+        className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
       >
         {featured.map((project) => {
           const copy = resolveProjectCopy(
             project,
             isLocalizedProject(project) ? projectItems : undefined
           );
+          const displayTitle = copy.wordmark ?? copy.title;
+          const visibleStack = project.stack.slice(0, 6);
+          const remainingStackCount = Math.max(0, project.stack.length - visibleStack.length);
           const logo = project.logo;
+          const logoScaleClass =
+            project.id === "lumagestor" ? "scale-[1.26]" : "scale-100";
           return (
             <Card
               key={project.id}
@@ -71,29 +76,36 @@ export function FeaturedProjects({
               {logo ? (
                 <>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={logo.src}
-                    alt=""
-                    width={176}
-                    height={40}
-                    aria-hidden
-                    className="h-9 w-auto max-w-[min(100%,12.5rem)] shrink-0 object-contain object-left dark:brightness-0 dark:invert"
-                  />
+                  <div className="flex h-10 w-[12.5rem] max-w-full items-center">
+                    <img
+                      src={logo.src}
+                      alt=""
+                      width={176}
+                      height={40}
+                      aria-hidden
+                      className={`h-9 w-auto max-w-full shrink-0 origin-left object-contain object-left dark:brightness-0 dark:invert ${logoScaleClass}`}
+                    />
+                  </div>
                   <h3 className="sr-only">
                     {copy.wordmark ? `${copy.wordmark} (${copy.title})` : copy.title}
                   </h3>
                 </>
               ) : (
-                <h3 className="text-h3 font-semibold">{copy.title}</h3>
+                <>
+                  <h3 className="text-h3 font-semibold">{displayTitle}</h3>
+                  {copy.wordmark && copy.wordmark !== copy.title ? (
+                    <p className="mt-1 text-xs text-fg-muted">{copy.title}</p>
+                  ) : null}
+                </>
               )}
-              <p className="mt-3 flex-1 text-caption leading-relaxed text-fg-secondary">
-                {copy.summary}
-              </p>
               <p className="mt-5 text-caption font-medium text-fg-primary">
                 {copy.impact}
               </p>
+              <p className="mt-3 flex-1 text-caption leading-relaxed text-fg-secondary">
+                {copy.summary}
+              </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
+                {visibleStack.map((item) => (
                   <span
                     key={`${project.id}-${item}`}
                     className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
@@ -101,6 +113,11 @@ export function FeaturedProjects({
                     {item}
                   </span>
                 ))}
+                {remainingStackCount > 0 ? (
+                  <span className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary">
+                    +{remainingStackCount}
+                  </span>
+                ) : null}
               </div>
               <Link
                 href={`/${locale}/projects#${project.id}`}

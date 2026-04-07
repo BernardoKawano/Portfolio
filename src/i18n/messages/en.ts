@@ -73,7 +73,9 @@ export const enMessages = {
       process: "Process",
       impact: "Impact",
       links: "Links",
-      caseStudy: "Detailed case",
+      caseStudy: "More details",
+      detailsHeading: "Product details",
+      attributionsHeading: "Credits",
       github: "GitHub",
       demo: "Demo",
     },
@@ -94,11 +96,89 @@ export const enMessages = {
         process:
           "Multi-part repo (frontend/, backend/, Flet at repo root); for evolution or migration: align Node LTS with Next 16 builds, AUTH_* and NEXT_PUBLIC_API_URL, FastAPI CORS for the frontend host, and lint/build/dev smoke tests with the backend on port 8000.",
       },
+      lumagestor: {
+        title: "LumaGestor",
+        wordmark: "Luma Gestor",
+        summary:
+          "SPA for construction financial management: payment requests with a professional PDF, a Kanban for status (Generated, Sent, Paid), and a per-project dashboard tied to Google Drive and Google Sheets — no loose spreadsheets.",
+        impact:
+          "One web flow to request, track, and consolidate by project; marking paid pushes the amount into the tracking sheet without retyping.",
+        problem:
+          "Site teams often scatter requests, receipts, and totals across files and spreadsheets, without a single view of what was generated, sent, or paid, or of balances per project.",
+        solution:
+          "A three-step wizard (project in Drive, line items and reimbursement notes, review) with PDF output into the project folder; a status Kanban that updates the sheet when paid; a per-project panel for totals, extras, client receipts, and payroll, reading and writing the spreadsheet.",
+        architecture:
+          "Browser (Vite + React Router) -> UI on routes /, /wizard, /status, /acompanhamento -> Google Drive folders/files and tabular data in Google Sheets; PDF generation with @react-pdf/renderer.",
+        process:
+          "Landing copy in src/content/homeLanding.ts and page in src/pages/HomePage.tsx; Vitest checks on content contracts; next steps: align Google API credentials, folder/sheet IDs, and demo vs production modes.",
+        details:
+          "Luma Gestor brings three pillars together that used to live across loose spreadsheets and folders. First, the request builder: a three-step wizard walks you through picking the project (tied to a Google Drive folder), entering line items and reimbursement notes, and final review. There the app builds a professional PDF with @react-pdf/renderer and leaves the file ready to send or archive in the project tree. Second, a Kanban-style board tracks requests as Generated, Sent, and Paid: the team sees where each request sits at a glance, and marking Paid can push the amount straight into the tracking sheet — no retyping. Third, per-project tracking rolls up contract totals, approved extras, client receipts, and payroll, reading and writing the same spreadsheet that drives day-to-day financial control. The Vite + React Router SPA uses dedicated routes — /wizard, /status, /acompanhamento — for each phase, with / on the home as the product landing.",
+        attributions: [
+          {
+            role: "Product, flows, and specification",
+            credit:
+              "Definition of the request → status → project journey, aligned with real construction operations and Drive/Sheets integration.",
+          },
+          {
+            role: "Frontend engineering (SPA)",
+            credit:
+              "Bernardo Kawano — UI implementation, wizard, Kanban, per-project panel, PDF generation, and Google API integration on the client.",
+          },
+          {
+            role: "Stack and libraries",
+            credit:
+              "React 19, Vite 7, TypeScript, Tailwind CSS 4, React Router 7, @react-pdf/renderer, date-fns, and supporting tooling (e.g. react-dropzone, html2canvas where used in the repo).",
+          },
+        ],
+      },
+      "tech-challange-2": {
+        title: "Medical Supplies Distribution Route Optimization System",
+        wordmark: "Medical Route Optimization (VRP)",
+        summary:
+          "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, real-time visualization with Pygame, interactive Folium maps, and optional local LLM support via Ollama.",
+        impact:
+          "Qualitative impact: the project demonstrates critical-delivery prioritization, potential total-distance reduction, and improved operational visibility through maps and reports, but it does not yet include externally validated benchmark metrics.",
+        problem:
+          "Hospitals and medical centers require urgent supplies; the challenge is to minimize total distance, prioritize critical deliveries, and respect vehicle operational constraints.",
+        solution:
+          "A genetic-algorithm engine evolves route populations with selection, crossover, mutation, and elitism, using a multi-objective fitness function with capacity/range penalties and balancing; it outputs an HTML map and operational artifacts.",
+        architecture:
+          "Modular architecture under src/ split across data models, optimization engine, visualization, LLM integration, and utilities; main.py orchestrates the end-to-end flow, while a Streamlit web_viewer provides browser-based presentation.",
+        process:
+          "Interactive setup (vehicles, points, generations) -> GA run with per-generation callbacks and metrics -> Pygame visualization -> Folium map generation -> optional Ollama instructions and report generation -> context persistence for Q&A.",
+        details:
+          "This project tackles a real critical-logistics scenario: distributing medical supplies across Sao Paulo under clinical priority and fleet constraints. Its core is a genetic algorithm using selection, crossover, mutation, and elitism, with a multi-objective fitness strategy that balances total distance, high-priority fulfillment, vehicle capacity, and range compliance. Execution is transparent rather than black-boxed: Pygame provides real-time route evolution visibility, while Folium outputs an interactive map for operational review and stakeholder communication. An optional LLM layer via Ollama (llama2) generates driver instructions and management reports locally, with optional OpenAI support when needed. The result is an end-to-end engineering case that combines optimization, visualization, web presentation through Streamlit, and developer-quality practices with Pytest, Black, Flake8, Pylint, and MyPy.",
+        attributions: [
+          {
+            role: "Academic context and guidance",
+            credit: "FIAP",
+          },
+          {
+            role: "Open-source libraries",
+            credit: "Python community",
+          },
+          {
+            role: "Local LLM layer",
+            credit: "Ollama Team",
+          },
+          {
+            role: "Map foundation",
+            credit: "OpenStreetMap",
+          },
+        ],
+      },
     },
     lumaDemos: {
       sectionTitle: "How data goes in, is processed, and comes out",
       sectionSubtitle:
         "Ideal in-product journey (illustrative, no live API): landing through calendar to month totals.",
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint:
+          "Turn on to cycle Analysis and Calendar automatically; turn off to pick manually.",
+        selectSceneHint:
+          "Click a tab to view the PDF analysis demo or the calendar and cash-book demo.",
+      },
       noteImportCalendar:
         "Import to calendar: after the PDF analysis summary, the button sends per-day totals into the calendar as income (description like “Statement” plus the date, amount = net for that day). The backend persists via POST /api/calendar/add-from-analysis and returns how many rows were added vs skipped as duplicates — so you don’t retype what the PDF already extracted.",
       notePrintBook:
@@ -227,6 +307,167 @@ export const enMessages = {
         bookPreviewSaldoFinalValue: "3,800.00",
         bookFlowHint:
           "The server filters only what is on the calendar in this range — not the analyzed statement PDF.",
+      },
+    },
+    techChallenge2Walkthrough: {
+      sectionTitle: "How the web viewer works",
+      sectionSubtitle:
+        "Five-scene animation matching the same style as other case studies: Live, Map, Overview, Report, and Chat.",
+      videoBadge: "Illustrative demo",
+      noteIllustrative:
+        "Visual flow to communicate the web_viewer experience without relying on local artifacts at viewing time.",
+      sceneLabels: [
+        "Runs simulation and tracks progress",
+        "Shows latest interactive map",
+        "Summarizes routes per vehicle",
+        "Displays markdown report",
+        "Enables contextual LLM Q&A",
+      ],
+      tabs: {
+        live: "Live",
+        map: "Map",
+        overview: "Overview",
+        report: "Report",
+        chat: "Chat",
+      },
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint:
+          "Turn on to cycle scenes automatically; turn off to explore by clicking tabs.",
+        selectSceneHint: "Click a tab to jump to that part of the web viewer.",
+      },
+      live: {
+        chrome: "Tech Challange 2 - Live",
+        route: "web_viewer/app_streamlit.py · Live tab",
+        status: "Simulation running",
+        action: "GA in progress",
+        metricGeneration: "Generation",
+        metricDistance: "Best distance",
+        metricPriority: "Critical deliveries",
+        progress: "Execution progress",
+        simulationCaption: "Real-time visualization (Pygame-style reference)",
+      },
+      map: {
+        chrome: "Tech Challange 2 - Map",
+        route: "outputs/maps/latest.html",
+        title: "Folium map · interactive HTML export",
+        subtitle:
+          "In the real project: Folium + Leaflet embed the generated HTML (PolyLines per vehicle, markers, popups) inside Streamlit.",
+        info: "If no map file exists, the viewer suggests running python main.py to generate artifacts.",
+        embedNote:
+          "The Streamlit Map tab loads the newest outputs/maps/*.html via st.components.v1.html (fixed height, native iframe scrolling).",
+        layersNote:
+          "Folium stacks: OSM basemap, colored route Polylines per fleet, priority markers (P1/P2), and per-stop popups.",
+        legendTitle: "Legend",
+        legendDepot: "Depot / start",
+        legendCritical: "Delivery P1 (critical)",
+        legendStandard: "Delivery P2",
+        legendPolyline: "PolyLine = vehicle stop order",
+        districtNorth: "North",
+        districtEast: "East",
+        districtSouth: "South",
+        attribution: "Map data · OpenStreetMap",
+        uiFolium: "Folium",
+        uiLeaflet: "Leaflet",
+        uiEmbed: "st.components.v1.html",
+        poiCd: "DC · supplies",
+        poiHNorte: "Municipal Hospital North",
+        poiUpa: "ER East",
+        poiSouth: "South aid post",
+        poiIc: "IC cardio · P1",
+        poiHub: "East logistics hub",
+      },
+      overview: {
+        chrome: "Tech Challange 2 - Overview",
+        route: "outputs/session/latest_context.json",
+        title: "Operational summary per vehicle",
+        rows: [
+          { vehicle: "V-01", stops: "7", distance: "54.2 km", priority: "100%" },
+          { vehicle: "V-02", stops: "6", distance: "49.8 km", priority: "92%" },
+          { vehicle: "V-03", stops: "5", distance: "45.1 km", priority: "89%" },
+        ],
+      },
+      report: {
+        chrome: "Tech Challange 2 - Report",
+        route: "outputs/reports/*.md",
+        title: "Management summary for the run",
+        bullets: [
+          "Total distance reduced while respecting vehicle capacity and range.",
+          "High-priority deliveries are served first in the final plan.",
+          "Final route is published with context for operational auditability.",
+        ],
+        footer: "If report artifacts are missing, the UI recommends the generation command and expected status.",
+      },
+      chat: {
+        chrome: "Tech Challange 2 - Chat",
+        route: "llm_integration/qa_system.py",
+        prompt: "Which points have the highest logistics risk and which route should I prioritize now?",
+        answer:
+          "Based on the latest run context, prioritize high-risk hospitals in the north corridor and rebalance vehicle V-02 to reduce response time.",
+        modelBadge: "Ollama · llama2",
+      },
+    },
+    lumaGestorWalkthrough: {
+      sectionTitle: "See the flow in motion",
+      sectionSubtitle:
+        "Three scenes in sequence (illustrative, no live API): request builder, status Kanban, and per-project tracking.",
+      videoBadge: "Illustrative video",
+      noteIllustrative:
+        "Auto-playing animation that simulates the app. Timing and numbers are samples so visitors understand the product without opening the repo.",
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint:
+          "Turn on to cycle scenes automatically; turn off to explore by clicking tabs.",
+        selectSceneHint:
+          "Click a tab to view the wizard, Kanban board, or per-project panel.",
+      },
+      sceneLabels: ["Requests (wizard + PDF)", "Status (Kanban)", "Project (sheet)"],
+      wizard: {
+        chrome: "Luma Gestor — Wizard",
+        route: "/wizard",
+        step1: "Project in Drive",
+        step2: "Items & reimbursements",
+        step3: "Review & PDF",
+        obraLabel: "Selected project folder",
+        obraValue: "Drive · Projects / 2026 / Residencial Aurora",
+        itemsTitle: "Request line items",
+        line1: "Materials — vendor A",
+        line2: "Labor — framing crew",
+        reimburseLabel: "Reimbursement notes",
+        reimburseValue: "2 attachments validated · totals merged into the PDF",
+        reviewTitle: "Review before generating",
+        pdfName: "Request_Res_Aurora_2026-04-06.pdf",
+        primaryCta: "Generate PDF and save to folder",
+        toastSaved: "PDF saved to project folder · Kanban card created (Generated)",
+      },
+      kanban: {
+        chrome: "Luma Gestor — Status",
+        route: "/status",
+        colGenerated: "Generated",
+        colSent: "Sent",
+        colPaid: "Paid",
+        cardTitle: "Request · Materials + labor",
+        cardAmount: "R$ 5,400.50",
+        dragHint: "Dragging cards across columns mirrors the operational state of each request.",
+        moveHint: "The team moves the card when sending or paying.",
+        paidSyncHint: "Marking Paid syncs the amount into the tracking sheet.",
+      },
+      obra: {
+        chrome: "Luma Gestor — Tracking",
+        route: "/acompanhamento",
+        panelTitle: "Project financial summary",
+        contractRow: "Contract total",
+        extrasRow: "Approved extras",
+        clientRow: "Client receipts",
+        payrollRow: "Payroll payments",
+        contractVal: "R$ 842,000.00",
+        extrasVal: "R$ 38,200.00",
+        clientVal: "R$ 610,000.00",
+        payrollVal: "R$ 214,500.00",
+        netLabel: "Consolidated balance (from sheet)",
+        netVal: "R$ 175,700.00",
+        sheetFootnote:
+          "Illustrative values. In the real app, read/write happens in the Google Sheet tied to the project — the panel reflects what the team already recorded.",
       },
     },
   },
