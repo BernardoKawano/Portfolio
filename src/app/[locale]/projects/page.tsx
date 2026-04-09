@@ -15,9 +15,21 @@ import {
   type LumaProductDemosLabels,
 } from "@/components/projects/luma/LumaProductDemos";
 import {
+  TechChallenge1WalkthroughSection,
+  type TechChallenge1WalkthroughLabels,
+} from "@/components/projects/tech/TechChallenge1Walkthrough";
+import {
   TechChallenge2WalkthroughSection,
   type TechChallenge2WalkthroughLabels,
 } from "@/components/projects/tech/TechChallenge2Walkthrough";
+import {
+  TechChallenge3WalkthroughSection,
+  type TechChallenge3WalkthroughLabels,
+} from "@/components/projects/tech/TechChallenge3Walkthrough";
+import {
+  MultimodalClinicalWalkthroughSection,
+  type MultimodalClinicalWalkthroughLabels,
+} from "@/components/projects/clinical/MultimodalClinicalWalkthrough";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
 type ProjectsPageProps = {
@@ -179,6 +191,39 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                         techChallenge2Walkthrough: TechChallenge2WalkthroughLabels;
                       }
                     ).techChallenge2Walkthrough
+                  }
+                />
+              ) : null}
+              {project.id === "tech-challange-1" ? (
+                <TechChallenge1WalkthroughSection
+                  labels={
+                    (
+                      dictionary.projects as {
+                        techChallenge1Walkthrough: TechChallenge1WalkthroughLabels;
+                      }
+                    ).techChallenge1Walkthrough
+                  }
+                />
+              ) : null}
+              {project.id === "tech-challange-3" ? (
+                <TechChallenge3WalkthroughSection
+                  labels={
+                    (
+                      dictionary.projects as {
+                        techChallenge3Walkthrough: TechChallenge3WalkthroughLabels;
+                      }
+                    ).techChallenge3Walkthrough
+                  }
+                />
+              ) : null}
+              {project.id === "multimodal-clinical-monitoring" ? (
+                <MultimodalClinicalWalkthroughSection
+                  labels={
+                    (
+                      dictionary.projects as {
+                        multimodalClinicalWalkthrough: MultimodalClinicalWalkthroughLabels;
+                      }
+                    ).multimodalClinicalWalkthrough
                   }
                 />
               ) : null}

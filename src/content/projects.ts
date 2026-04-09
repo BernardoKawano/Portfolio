@@ -53,6 +53,9 @@ export type ProjectLocaleItems = {
   lumalector: ProjectCopy;
   lumagestor: ProjectCopy;
   "tech-challange-2": ProjectCopy;
+  "tech-challange-3": ProjectCopy;
+  "tech-challange-1": ProjectCopy;
+  "multimodal-clinical-monitoring": ProjectCopy;
 };
 
 export function isLocalizedProject(project: Project): project is LocalizedProject {
@@ -127,6 +130,30 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "tech-challange-1",
+    featured: true,
+    localeKey: "tech-challange-1",
+    stack: [
+      "Python 3.10+",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Matplotlib",
+      "Seaborn",
+      "Jupyter",
+      "SHAP",
+      "Docker",
+    ],
+    logo: {
+      src: "/images/logo-onco-ai.png",
+    },
+    links: {
+      caseStudy: "/pt/projects#tech-challange-1",
+      github: "https://github.com/BernardoKawano/FIAPTechChallange01",
+      demo: "https://colab.research.google.com/github/BernardoKawano/FIAPTechChallange01/blob/main/tech-challenge-fase1/notebooks/02_colab_pipeline_publico.ipynb",
+    },
+  },
+  {
     id: "tech-challange-2",
     featured: true,
     localeKey: "tech-challange-2",
@@ -134,7 +161,7 @@ export const projects: Project[] = [
       "Python 3.8+",
       "NumPy",
       "DEAP",
-      "Pygame",
+      "Web UI",
       "Folium",
       "Matplotlib",
       "Plotly",
@@ -151,6 +178,9 @@ export const projects: Project[] = [
       "Pylint",
       "MyPy",
     ],
+    logo: {
+      src: "/images/logo-rota-vrp.png",
+    },
     links: {
       caseStudy: "/pt/projects#tech-challange-2",
       github: "https://github.com/BernardoKawano/Tech-Challange-2",
@@ -158,63 +188,61 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "ops-ai-triage",
+    id: "tech-challange-3",
     featured: true,
-    title: "AI Ops Triage Pipeline",
-    summary:
-      "Fluxo de triagem operacional com classificacao automatica e roteamento inteligente.",
-    stack: ["Next.js", "TypeScript", "Python", "OpenAI API"],
-    impact: "TODO: X+ horas economizadas por mes",
-    problem: "Times perdiam tempo com triagem manual e priorizacao inconsistente.",
-    solution:
-      "Automacao com classificacao contextual, regras de prioridade e notificacao automatica.",
-    architecture: "Ingestion -> Enrichment -> LLM Classifier -> Action Router",
-    process: "Mapeamento do fluxo atual, prototipo rapido, iteracao com stakeholders.",
+    localeKey: "tech-challange-3",
+    stack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "PEFT (QLoRA/LoRA)",
+      "LangChain",
+      "LangGraph",
+      "BitsAndBytes",
+      "Hugging Face Datasets",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Jupyter",
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+    ],
+    logo: {
+      src: "/images/logo-clinguard-ai.png",
+    },
     links: {
-      caseStudy: "/en/projects#ops-ai-triage",
-      github: "",
-      demo: "",
+      caseStudy: "/pt/projects#tech-challange-3",
+      github: "https://github.com/BernardoKawano/Tech-Challange-3",
+      demo: "https://youtu.be/LfE3NgAbXyo",
     },
   },
   {
-    id: "document-intelligence",
+    id: "multimodal-clinical-monitoring",
     featured: true,
-    title: "Document Intelligence Workflow",
-    summary:
-      "Pipeline para leitura, extracao e estruturacao de documentos operacionais.",
-    stack: ["TypeScript", "Node.js", "OCR", "PostgreSQL"],
-    impact: "TODO: Z documentos processados com menos retrabalho",
-    problem:
-      "Documentos chegavam em formatos diferentes e exigiam entrada manual repetitiva.",
-    solution:
-      "Orquestracao de OCR e validacao com regras para gerar dados estruturados confiaveis.",
-    architecture: "Upload -> OCR -> Parser -> Validation -> Storage",
-    process: "Piloto em dados reais, medicao de erro, refinamento de regras.",
-    links: {
-      caseStudy: "/en/projects#document-intelligence",
-      github: "",
-      demo: "",
+    localeKey: "multimodal-clinical-monitoring",
+    stack: [
+      "Python",
+      "LangGraph",
+      "LangChain",
+      "OpenAI API (gpt-4o-mini)",
+      "PyTorch",
+      "Ultralytics YOLOv8",
+      "OpenCV",
+      "Librosa",
+      "Scikit-learn",
+      "Azure Speech Services",
+      "Azure Video Indexer",
+      "Hugging Face Datasets",
+      "Pytest",
+    ],
+    logo: {
+      src: "/images/logo-medguard-ai.png",
     },
-  },
-  {
-    id: "workflow-reduction",
-    featured: true,
-    title: "Workflow Reduction Engine",
-    summary:
-      "Redesenho de processo com automacao para reduzir passos e gargalos de aprovacao.",
-    stack: ["Next.js", "Framer Motion", "Supabase"],
-    impact: "TODO: Y etapas reduzidas no fluxo principal",
-    problem:
-      "Processos longos com dependencias manuais aumentavam atrasos e erros operacionais.",
-    solution:
-      "Fluxo enxuto com checkpoints claros e automacoes para tarefas repetitivas.",
-    architecture: "Trigger -> Decision Nodes -> Automated Actions -> Audit Log",
-    process:
-      "Levantamento de gargalos, desenho do novo fluxo, rollout incremental por equipe.",
     links: {
-      caseStudy: "/en/projects#workflow-reduction",
-      github: "",
-      demo: "",
+      caseStudy: "/pt/projects#multimodal-clinical-monitoring",
+      github: "https://github.com/BernardoKawano/Tech-Challange-4",
+      demo: "https://youtu.be/xXdvzQmYixA",
     },
   },
 ];

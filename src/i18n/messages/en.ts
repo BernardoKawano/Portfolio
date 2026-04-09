@@ -131,13 +131,39 @@ export const enMessages = {
           },
         ],
       },
-      "tech-challange-2": {
-        title: "Medical Supplies Distribution Route Optimization System",
-        wordmark: "Medical Route Optimization (VRP)",
+      "tech-challange-1": {
+        title: "OncoClass AI - Breast Cancer Diagnostic Support",
+        wordmark: "OncoClass AI",
         summary:
-          "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, real-time visualization with Pygame, interactive Folium maps, and optional local LLM support via Ollama.",
+          "Machine learning pipeline for binary classification (benign vs malignant) with EDA, preprocessing, comparative training (Logistic Regression, Random Forest, and KNN), and automated reporting.",
         impact:
-          "Qualitative impact: the project demonstrates critical-delivery prioritization, potential total-distance reduction, and improved operational visibility through maps and reports, but it does not yet include externally validated benchmark metrics.",
+          "Breast cancer triage project built to catch malignant cases in the first screening step; on test data, Logistic Regression reached 0.976 recall, lowering false-negative risk and improving early clinical decision support.",
+        problem:
+          "In breast-cancer triage, false negatives can delay clinical intervention; the project needed to prioritize sensitivity for malignant-case detection.",
+        solution:
+          "End-to-end Python pipeline with stratified split (60/20/20), StandardScaler, PCA (95% explained variance), GridSearchCV optimization, and evaluation using accuracy, precision, recall, F1, and ROC AUC.",
+        architecture:
+          "Modular structure across data/, src/, notebooks/, and reports/: train.py orchestrates data loading, EDA, modeling, evaluation, and artifact export (JSON, CSV, and figures).",
+        process:
+          "Dataset loading -> visual/text EDA -> preprocessing -> train and optimize 3 models -> test evaluation -> metric publishing in reports/final_results.json and figures in reports/figures.",
+        attributions: [
+          {
+            role: "Academic context",
+            credit: "FIAP - Tech Challenge Team.",
+          },
+          {
+            role: "Dataset and references",
+            credit:
+              "Breast Cancer Wisconsin (UCI) plus the scikit-learn ecosystem for pipeline implementation.",
+          },
+        ],
+      },
+      "tech-challange-2": {
+        title: "Rota VRP (Vehicle Routing Problem) - Medical Route Optimization",
+        summary:
+          "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, real-time web visualization, interactive Folium maps, and optional local LLM support via Ollama.",
+        impact:
+          "Routes prioritize critical deliveries while balancing vehicle capacity and range; operations gain clearer visibility through interactive maps and per-run reports.",
         problem:
           "Hospitals and medical centers require urgent supplies; the challenge is to minimize total distance, prioritize critical deliveries, and respect vehicle operational constraints.",
         solution:
@@ -145,9 +171,9 @@ export const enMessages = {
         architecture:
           "Modular architecture under src/ split across data models, optimization engine, visualization, LLM integration, and utilities; main.py orchestrates the end-to-end flow, while a Streamlit web_viewer provides browser-based presentation.",
         process:
-          "Interactive setup (vehicles, points, generations) -> GA run with per-generation callbacks and metrics -> Pygame visualization -> Folium map generation -> optional Ollama instructions and report generation -> context persistence for Q&A.",
+          "Interactive setup (vehicles, points, generations) -> GA run with per-generation callbacks and metrics -> web visualization -> Folium map generation -> optional Ollama instructions and report generation -> context persistence for Q&A.",
         details:
-          "This project tackles a real critical-logistics scenario: distributing medical supplies across Sao Paulo under clinical priority and fleet constraints. Its core is a genetic algorithm using selection, crossover, mutation, and elitism, with a multi-objective fitness strategy that balances total distance, high-priority fulfillment, vehicle capacity, and range compliance. Execution is transparent rather than black-boxed: Pygame provides real-time route evolution visibility, while Folium outputs an interactive map for operational review and stakeholder communication. An optional LLM layer via Ollama (llama2) generates driver instructions and management reports locally, with optional OpenAI support when needed. The result is an end-to-end engineering case that combines optimization, visualization, web presentation through Streamlit, and developer-quality practices with Pytest, Black, Flake8, Pylint, and MyPy.",
+          "This project tackles a real critical-logistics scenario: distributing medical supplies across Sao Paulo under clinical priority and fleet constraints. Its core is a genetic algorithm using selection, crossover, mutation, and elitism, with a multi-objective fitness strategy that balances total distance, high-priority fulfillment, vehicle capacity, and range compliance. Execution is transparent rather than black-boxed: the web visualization provides real-time route evolution visibility, while Folium outputs an interactive map for operational review and stakeholder communication. An optional LLM layer via Ollama (llama2) generates driver instructions and management reports locally, with optional OpenAI support when needed. The result is an end-to-end engineering case that combines optimization, visualization, web presentation through Streamlit, and developer-quality practices with Pytest, Black, Flake8, Pylint, and MyPy.",
         attributions: [
           {
             role: "Academic context and guidance",
@@ -166,6 +192,127 @@ export const enMessages = {
             credit: "OpenStreetMap",
           },
         ],
+      },
+      "tech-challange-3": {
+        title: "Safe Clinical Copilot - Enterprise Solution",
+        summary:
+          "A clinical copilot for educational support that generates contextualized responses, applies safety guardrails, and keeps an audit trail, with a web visual simulator to demonstrate the flow.",
+        impact:
+          "Question, guardrail, and audit flow makes each response traceable and safer for educational use; it reinforces responsible AI in healthcare without replacing clinical decisions.",
+        problem:
+          "Healthcare professionals and students face high information volume, limited time for consultation, and the need to keep traceable records of what was reviewed.",
+        solution:
+          "A pipeline that takes clinical question plus context, generates an answer with a fine-tuned LLM, checks risks through guardrails, and stores complete audit logs.",
+        architecture:
+          "Modular Python architecture (langchain_integration, security, logging, evaluation) with a graph flow powered by LangGraph plus a single-page web visual simulator.",
+        process:
+          "Fine-tuning Microsoft Phi-2 with QLoRA on an anonymized dataset (963 samples), selecting the best checkpoint by eval_loss, and validating through test scripts and evaluation artifacts.",
+        attributions: [
+          {
+            role: "Base model",
+            credit: "Microsoft Phi-2 (2.7B parameters).",
+          },
+          {
+            role: "Frameworks and libraries",
+            credit:
+              "Hugging Face Transformers/PEFT/BitsAndBytes, LangChain, and LangGraph.",
+          },
+          {
+            role: "Technical references",
+            credit: "PEFT docs, Phi-2 model card, and the QLoRA paper listed in MODEL.md.",
+          },
+        ],
+      },
+      "multimodal-clinical-monitoring": {
+        title: "MedWatch AI System",
+        wordmark: "MedWatch AI",
+        summary:
+          "A multimodal AI system for clinical monitoring that processes surgical video, audio, and text, performs LangGraph-based fusion, and generates reports and alerts for medical-team support.",
+        impact:
+          "Video, audio, and text signals are consolidated in a single flow with contextual alerts; teams gain faster triage and stronger clinical observability.",
+        problem:
+          "Clinical teams need early risk identification from fragmented video, audio, and text signals, but often lack an integrated operational workflow.",
+        solution:
+          "A pipeline with input-type classification, media-specific analysis (video instruments/anomalies, atypical vocal patterns in audio, and clinical text), multimodal fusion, final reporting, and optional alert dispatch.",
+        architecture:
+          "Modular architecture across src/video, src/audio, src/azure, src/fusion, src/reports, and src/alerts, orchestrated by LangGraph in the flow classify -> process_* -> fusion -> report -> send_alerts.",
+        process:
+          "Environment and .env setup, dataset/model download, mandatory training of video and audio autoencoders, and demo execution with run_demo.py (--text, --audio, or --video) or the presentation notebook.",
+        attributions: [
+          {
+            role: "Surgical dataset",
+            credit: "CAMMA CholecT45.",
+          },
+          {
+            role: "Instrument detection models",
+            credit: "Roboflow Universe (cholect45-x6lm4) and DocCheck.",
+          },
+          {
+            role: "Emotional audio dataset",
+            credit: "RAVDESS (downloaded through project scripts).",
+          },
+          {
+            role: "AI infrastructure and services",
+            credit: "Azure Speech Services and Azure Video Indexer (optional).",
+          },
+        ],
+      },
+    },
+    multimodalClinicalWalkthrough: {
+      sectionTitle: "Operational flow walkthrough",
+      sectionSubtitle:
+        "Three-stage animation showing how the system worked: multimodal input, pipeline orchestration, and report/alert delivery.",
+      videoBadge: "Illustrative demo",
+      noteIllustrative:
+        "Visual representation of the behavior documented in the repository, without running the backend live.",
+      sceneLabels: [
+        "Input: text, audio, or video",
+        "LangGraph pipeline processing",
+        "Output: report and alerts",
+      ],
+      tabs: {
+        input: "Input",
+        pipeline: "Pipeline",
+        output: "Output",
+      },
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint:
+          "Enable automatic scene switching or disable it for manual navigation.",
+        selectSceneHint: "Use the tabs to inspect each stage of the workflow.",
+      },
+      input: {
+        chrome: "Clinical Monitoring - Input",
+        route: "run_demo.py (--text | --audio | --video)",
+        title: "Input-type classification",
+        hint:
+          "The system identifies media type first and prepares state for conditional routing.",
+        sampleText: "Patient under follow-up with anxiety-related complaints.",
+        sampleAudio: "data/sample_audio_anxiety.wav",
+        sampleVideo: "data/sample_video_cholect45.mp4",
+      },
+      pipeline: {
+        chrome: "Clinical Monitoring - Processing",
+        route: "src/fusion/graph.py",
+        title: "Graph-orchestrated multimodal pipeline",
+        status: "Running",
+        nodes: [
+          "classify",
+          "process_video | process_audio | process_text",
+          "fusion",
+          "report",
+          "send_alerts",
+        ],
+      },
+      output: {
+        chrome: "Clinical Monitoring - Output",
+        route: "src/reports/report_generator.py + src/alerts/notifier.py",
+        title: "Clinical report and alert delivery",
+        reportSnippet:
+          "Consolidated summary: risk signals from audio/video with follow-up recommendations for the medical team.",
+        alertsSnippet:
+          "Preliminary alerts: atypical vocal pattern (high score) and surgical frame anomaly check.",
+        complianceTag: "Flow completed",
       },
     },
     lumaDemos: {
@@ -345,7 +492,7 @@ export const enMessages = {
         metricDistance: "Best distance",
         metricPriority: "Critical deliveries",
         progress: "Execution progress",
-        simulationCaption: "Real-time visualization (Pygame-style reference)",
+        simulationCaption: "Real-time visualization (web interface)",
       },
       map: {
         chrome: "Tech Challange 2 - Map",
@@ -405,6 +552,122 @@ export const enMessages = {
         answer:
           "Based on the latest run context, prioritize high-risk hospitals in the north corridor and rebalance vehicle V-02 to reduce response time.",
         modelBadge: "Ollama · llama2",
+      },
+    },
+    techChallenge1Walkthrough: {
+      sectionTitle: "Full OncoClass AI walkthrough",
+      sectionSubtitle:
+        "Three-scene walkthrough: data exploration, model training/optimization, and final results review.",
+      videoBadge: "Illustrative demo",
+      noteIllustrative:
+        "Visual flow that shows the implemented notebook and pipeline functions without requiring live execution in the browser.",
+      sceneLabels: [
+        "Dataset loading and EDA",
+        "Preprocessing + model training",
+        "Final metrics and artifacts",
+      ],
+      tabs: {
+        dataset: "Dataset + EDA",
+        training: "Training",
+        results: "Results",
+      },
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint:
+          "Turn on to cycle scenes automatically; turn off to inspect each scene manually.",
+        selectSceneHint: "Use tabs to follow the complete project walkthrough.",
+      },
+      dataset: {
+        chrome: "OncoClass AI - Dataset and EDA",
+        route: "notebooks/02_colab_pipeline_publico.ipynb + src/eda.py",
+        datasetTitle: "Breast Cancer Wisconsin (Diagnostic)",
+        datasetMeta: "569 samples · 30 features · benign/malignant classes",
+        stepLoad: "1) Load local CSV or sklearn dataset",
+        stepEda: "2) Inspect class distribution and descriptive stats",
+        stepOutliers: "3) Analyze per-feature outliers",
+        stepCorrelation: "4) Build correlation matrix and visual report",
+        note: "Outputs from this stage: text/HTML reports and figures under reports/figures.",
+      },
+      training: {
+        chrome: "OncoClass AI - Modeling",
+        route: "src/train.py",
+        title: "Training and validation pipeline",
+        split: "Stratified 60/20/20 split (train/validation/test).",
+        preprocessing: "StandardScaler + PCA (95% explained variance) before modeling.",
+        modelsTitle: "Evaluated models",
+        model1: "Logistic Regression",
+        model2: "Random Forest (GridSearchCV)",
+        model3: "KNN (GridSearchCV)",
+        objective: "Main objective: maximize recall for triage support.",
+      },
+      results: {
+        chrome: "OncoClass AI - Results",
+        route: "reports/final_results.json + reports/models_summary.csv",
+        title: "Final comparison and top model",
+        bestModelLabel: "Best by recall: Logistic Regression",
+        recallLabel: "Recall: 0.9762",
+        accuracyLabel: "Accuracy: 0.9737",
+        rocAucLabel: "ROC AUC: 0.9954",
+        reportNote:
+          "The pipeline also stores confusion matrices, ROC/PR curves, and complementary analysis plots for quick review.",
+        outputFiles: "Artifacts: JSON, CSV, and visualizations in reports/figures",
+      },
+    },
+    techChallenge3Walkthrough: {
+      sectionTitle: "Clinical copilot web demo",
+      sectionSubtitle:
+        "Animated chat conversation plus LangGraph execution flow: input, generation, guardrails, audit, and final response.",
+      videoBadge: "Illustrative demo",
+      noteIllustrative:
+        "Visual simulation to explain the web-page experience without requiring live backend execution at viewing time.",
+      sceneLabels: [
+        "User sends question and context",
+        "LangGraph runs the decision pipeline",
+        "Audited and safer final answer",
+      ],
+      tabs: {
+        chat: "Chat",
+        graph: "LangGraph",
+        output: "Output",
+      },
+      controls: {
+        autoplay: "Autoplay",
+        autoplayHint: "Enable auto scene switching or disable to navigate manually.",
+        selectSceneHint: "Use tabs to view conversation, graph flow, and final output.",
+      },
+      chat: {
+        chrome: "Clinical Copilot - Chat",
+        route: "teste_visual_navegador/index.html",
+        modelBadge: "Phi-2 fine-tuned + guardrails",
+        prompt: "Clinical context",
+        context:
+          "Patient with type 2 diabetes, no emergency signs, under regular follow-up care.",
+        userQuestion: "Which general guidance should I review before the next consultation?",
+        assistantDraft:
+          "Generating educational contextual response with safety constraints and no direct prescription...",
+      },
+      graph: {
+        chrome: "Clinical Copilot - LangGraph Flow",
+        route: "src/langchain_integration/graph_flows.py",
+        title: "Clinical decision pipeline",
+        inputNode: "validate_input (question/context checks)",
+        generateNode: "generate_response (draft answer)",
+        guardrailsNode: "apply_guardrails (risk checks)",
+        auditNode: "auditor.log_interaction (trace logging)",
+        finalNode: "final_response (user-facing output)",
+        statusRunning: "Running",
+      },
+      output: {
+        chrome: "Clinical Copilot - Output",
+        route: "src/security/guardrails.py + src/logging/auditor.py",
+        title: "Safety-aware final output",
+        guardrailAnalysis:
+          "No direct prescription detected; keep explicit reminder for human clinical validation.",
+        finalAnswer:
+          "Final answer: review treatment adherence, food routine, physical activity, and warning signs with professional follow-up.",
+        auditLog:
+          "Audit trail: question, summarized context, guardrail result, timestamp, and execution metadata are recorded.",
+        complianceTag: "Approved for educational support",
       },
     },
     lumaGestorWalkthrough: {

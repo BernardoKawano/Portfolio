@@ -131,13 +131,39 @@ export const ptMessages = {
           },
         ],
       },
-      "tech-challange-2": {
-        title: "Sistema de Otimizacao de Rotas para Distribuicao de Suprimentos Medicos",
-        wordmark: "Otimizacao de Rotas Medicas (VRP)",
+      "tech-challange-1": {
+        title: "OncoClass AI - Suporte a Diagnóstico de Câncer de Mama",
+        wordmark: "OncoClass AI",
         summary:
-          "Sistema de otimizacao de rotas para distribuicao de suprimentos medicos em Sao Paulo, usando algoritmo genetico com restricoes de prioridade, capacidade e autonomia, visualizacao em tempo real com Pygame, mapas interativos com Folium e camada opcional de LLM local via Ollama.",
+          "Pipeline de machine learning para classificação binária (benigno vs maligno) com EDA, pré-processamento, treino comparativo (Logistic Regression, Random Forest e KNN) e geração automática de relatórios.",
         impact:
-          "Impacto qualitativo: priorizacao de entregas criticas, reducao potencial de distancia total e maior visibilidade operacional com mapas e relatorios, ainda sem benchmark externo validado.",
+          "Projeto de triagem para cancer de mama que prioriza detectar casos malignos na primeira avaliacao, reduzindo risco de falso negativo e fortalecendo o apoio a decisao clinica inicial.",
+        problem:
+          "Na triagem de câncer de mama, falsos negativos podem atrasar intervenção clínica; era necessário priorizar sensibilidade na detecção de casos malignos.",
+        solution:
+          "Pipeline ponta a ponta em Python com split estratificado (60/20/20), StandardScaler, PCA (95% da variância), otimização por GridSearchCV e avaliação com accuracy, precision, recall, F1 e ROC AUC.",
+        architecture:
+          "Estrutura modular em data/, src/, notebooks/ e reports/: train.py orquestra carga de dados, EDA, modelagem, avaliação e exportação de artefatos (JSON, CSV e figuras).",
+        process:
+          "Carregamento do dataset -> EDA visual/textual -> pré-processamento -> treino e otimização de 3 modelos -> avaliação em teste -> publicação de métricas em reports/final_results.json e visualizações em reports/figures.",
+        attributions: [
+          {
+            role: "Contexto acadêmico",
+            credit: "FIAP - Tech Challenge Team.",
+          },
+          {
+            role: "Base de dados e referências",
+            credit:
+              "Breast Cancer Wisconsin (UCI) e ecossistema scikit-learn para implementação do pipeline.",
+          },
+        ],
+      },
+      "tech-challange-2": {
+        title: "Rota VRP (Vehicle Routing Problem) - Otimizacao de Rotas Medicas",
+        summary:
+          "Sistema de otimizacao de rotas para distribuicao de suprimentos medicos em Sao Paulo, usando algoritmo genetico com restricoes de prioridade, capacidade e autonomia, visualizacao web em tempo real, mapas interativos com Folium e camada opcional de LLM local via Ollama.",
+        impact:
+          "Rotas priorizam entregas criticas e equilibram capacidade e autonomia dos veiculos; a operacao ganha visibilidade com mapa interativo e relatorio por rodada.",
         problem:
           "Hospitais e centros medicos precisam receber suprimentos urgentes; o desafio e minimizar distancia total, priorizar entregas criticas e respeitar limites operacionais dos veiculos.",
         solution:
@@ -145,9 +171,9 @@ export const ptMessages = {
         architecture:
           "Arquitetura modular em src/: models, genetic_algorithm, visualization, llm_integration e utilitarios; main.py orquestra o fluxo ponta a ponta, com web_viewer em Streamlit para apresentacao no navegador.",
         process:
-          "Configuracao interativa (veiculos, pontos, geracoes) -> execucao do algoritmo genetico com callbacks por geracao e metricas -> visualizacao Pygame -> geracao de mapa Folium -> (opcional) instrucoes e relatorio com Ollama -> persistencia de contexto para Q&A.",
+          "Configuracao interativa (veiculos, pontos, geracoes) -> execucao do algoritmo genetico com callbacks por geracao e metricas -> visualizacao web -> geracao de mapa Folium -> (opcional) instrucoes e relatorio com Ollama -> persistencia de contexto para Q&A.",
         details:
-          "Este projeto resolve um cenario real de logistica critica: distribuir suprimentos medicos em uma cidade complexa como Sao Paulo, com prioridades clinicas e limitacoes operacionais por veiculo. O nucleo e um algoritmo genetico com selecao, crossover, mutacao e elitismo, orientado por fitness multiobjetivo para equilibrar distancia total, atendimento de pontos prioritarios, capacidade e autonomia. A operacao nao fica numa caixa-preta: durante a execucao, a visualizacao em Pygame permite acompanhar o comportamento das rotas em tempo real; ao final, o mapa Folium entrega leitura espacial clara para analise operacional e comunicacao com stakeholders. Como camada adicional, o projeto integra Ollama (llama2) para gerar instrucoes de condutor e relatorios gerenciais sem dependencia obrigatoria de servico externo, mantendo uma opcao OpenAI quando necessario. O resultado e um case completo de engenharia aplicada: modelagem, otimizacao, visualizacao, interface web em Streamlit e trilha de qualidade com Pytest, Black, Flake8, Pylint e MyPy.",
+          "Este projeto resolve um cenario real de logistica critica: distribuir suprimentos medicos em uma cidade complexa como Sao Paulo, com prioridades clinicas e limitacoes operacionais por veiculo. O nucleo e um algoritmo genetico com selecao, crossover, mutacao e elitismo, orientado por fitness multiobjetivo para equilibrar distancia total, atendimento de pontos prioritarios, capacidade e autonomia. A operacao nao fica numa caixa-preta: durante a execucao, a visualizacao web permite acompanhar o comportamento das rotas em tempo real; ao final, o mapa Folium entrega leitura espacial clara para analise operacional e comunicacao com stakeholders. Como camada adicional, o projeto integra Ollama (llama2) para gerar instrucoes de condutor e relatorios gerenciais sem dependencia obrigatoria de servico externo, mantendo uma opcao OpenAI quando necessario. O resultado e um case completo de engenharia aplicada: modelagem, otimizacao, visualizacao, interface web em Streamlit e trilha de qualidade com Pytest, Black, Flake8, Pylint e MyPy.",
         attributions: [
           {
             role: "Contexto academico e orientacao",
@@ -166,6 +192,128 @@ export const ptMessages = {
             credit: "OpenStreetMap",
           },
         ],
+      },
+      "tech-challange-3": {
+        title: "ClinGuard AI",
+        summary:
+          "Copiloto clinico para apoio educacional que gera respostas contextualizadas, aplica guardrails de seguranca e registra trilha de auditoria, com simulador visual web para demonstracao do fluxo.",
+        impact:
+          "Chat copiloto para medicos e equipes clinicas, treinado com mais de 900 conteudos medicos, com respostas contextualizadas, guardrails de seguranca e trilha de auditoria para acelerar decisoes com mais confianca e padronizacao.",
+        problem:
+          "Profissionais e estudantes de saude lidam com muito volume de informacao, pouco tempo para consulta e necessidade de rastreabilidade do que foi consultado.",
+        solution:
+          "Pipeline com pergunta e contexto clinico, geracao de resposta por LLM fine-tunada, verificacao de guardrails para riscos e registro completo de auditoria.",
+        architecture:
+          "Arquitetura modular em Python (langchain_integration, security, logging, evaluation) com fluxo em grafo via LangGraph e simulador visual web em pagina unica.",
+        process:
+          "Fine-tuning do Microsoft Phi-2 com QLoRA em dataset anonimizado (963 exemplos), selecao do melhor checkpoint por eval_loss e validacao por script de teste e artefatos de avaliacao.",
+        attributions: [
+          {
+            role: "Modelo base",
+            credit: "Microsoft Phi-2 (2.7B parametros).",
+          },
+          {
+            role: "Ecossistema e bibliotecas",
+            credit:
+              "Hugging Face Transformers/PEFT/BitsAndBytes, LangChain e LangGraph.",
+          },
+          {
+            role: "Referencias tecnicas",
+            credit:
+              "Documentacoes de PEFT e Phi-2, e artigo QLoRA listados no MODEL.md.",
+          },
+        ],
+      },
+      "multimodal-clinical-monitoring": {
+        title: "Sistema MedWatch AI",
+        wordmark: "MedWatch AI",
+        summary:
+          "Sistema multimodal de IA para monitoramento clinico que processa video cirurgico, audio e texto, faz fusao com LangGraph e gera relatorios e alertas para apoio a equipe medica.",
+        impact:
+          "O sistema junta video, audio e texto em um so lugar e avisa quando identifica sinais de piora do paciente ou possiveis complicacoes no procedimento. Assim, a equipe atende mais rapido e acompanha melhor cada caso.",
+        problem:
+          "Equipes clinicas precisam identificar riscos precoces com sinais fragmentados em video, audio e texto, sem um fluxo integrado e operacional.",
+        solution:
+          "Pipeline com classificacao por tipo de entrada, analise por midia (instrumentos e anomalias em video, padrao vocal atipico em audio e texto clinico), orquestracao com LangGraph, fusao multimodal, relatorio final e envio opcional de alertas.",
+        architecture:
+          "Arquitetura modular em src/video, src/audio, src/azure, src/fusion, src/reports e src/alerts, orquestrada por LangGraph no fluxo classificar -> processar_* -> fusao -> relatorio -> enviar_alertas.",
+        process:
+          "Setup de ambiente e .env, download de datasets/modelos, treino obrigatorio dos autoencoders de video e audio, e execucao das demos com run_demo.py (--text, --audio ou --video) ou notebook de apresentacao.",
+        attributions: [
+          {
+            role: "Dataset cirurgico",
+            credit: "CAMMA CholecT45.",
+          },
+          {
+            role: "Modelo de instrumentos",
+            credit: "Roboflow Universe (cholect45-x6lm4) e DocCheck.",
+          },
+          {
+            role: "Dataset de audio emocional",
+            credit: "RAVDESS (via scripts de download).",
+          },
+          {
+            role: "Infra e servicos de IA",
+            credit: "Azure Speech Services e Azure Video Indexer (opcional).",
+          },
+        ],
+      },
+    },
+    multimodalClinicalWalkthrough: {
+      sectionTitle: "Demonstracao do fluxo operacional",
+      sectionSubtitle:
+        "Animacao em tres etapas para mostrar como o sistema operava: entrada multimidia, orquestracao do pipeline e entrega de alertas e relatorio.",
+      videoBadge: "Demo ilustrativa",
+      noteIllustrative:
+        "Representacao visual do comportamento real documentado no repositorio, sem executar o backend em tempo real.",
+      sceneLabels: [
+        "Entrada: texto, audio ou video",
+        "Processamento com LangGraph",
+        "Saida: relatorio e alertas",
+      ],
+      tabs: {
+        input: "Entrada",
+        pipeline: "Pipeline",
+        output: "Resultado",
+      },
+      controls: {
+        autoplay: "Reproducao automatica",
+        autoplayHint:
+          "Ative para alternar as cenas automaticamente; desative para navegar manualmente.",
+        selectSceneHint: "Clique nas abas para visualizar cada etapa do fluxo.",
+      },
+      input: {
+        chrome: "Monitoramento Clinico - Entrada",
+        route: "run_demo.py (--text | --audio | --video)",
+        title: "Classificacao de tipo de entrada",
+        hint:
+          "O sistema identifica o tipo de midia e prepara o estado para o roteamento condicional.",
+        sampleText: "Paciente em acompanhamento com queixas de ansiedade.",
+        sampleAudio: "data/sample_audio_anxiety.wav",
+        sampleVideo: "data/sample_video_cholect45.mp4",
+      },
+      pipeline: {
+        chrome: "Monitoramento Clinico - Processamento",
+        route: "src/fusion/graph.py",
+        title: "Pipeline multimodal orquestrado por grafo",
+        status: "Executando",
+        nodes: [
+          "classificar",
+          "processar_video | processar_audio | processar_texto",
+          "fusao",
+          "relatorio",
+          "enviar_alertas",
+        ],
+      },
+      output: {
+        chrome: "Monitoramento Clinico - Resultado",
+        route: "src/reports/report_generator.py + src/alerts/notifier.py",
+        title: "Entrega de relatorio clinico e alertas",
+        reportSnippet:
+          "Resumo consolidado: sinais de risco detectados em audio/video e recomendacoes para acompanhamento da equipe.",
+        alertsSnippet:
+          "Alertas preliminares: padrao_vocal_atipico (score elevado) e verificacao de anomalia em frames cirurgicos.",
+        complianceTag: "Fluxo concluido",
       },
     },
     lumaDemos: {
@@ -345,7 +493,7 @@ export const ptMessages = {
         metricDistance: "Melhor distancia",
         metricPriority: "Entregas criticas",
         progress: "Progresso da execucao",
-        simulationCaption: "Visualizacao em tempo real (referencia Pygame)",
+        simulationCaption: "Visualizacao em tempo real (interface web)",
       },
       map: {
         chrome: "Tech Challange 2 - Mapa",
@@ -405,6 +553,123 @@ export const ptMessages = {
         answer:
           "Com base no contexto da ultima execucao, priorize os hospitais de risco alto no eixo norte e reavalie o veiculo V-02 para reduzir tempo de resposta.",
         modelBadge: "Ollama · llama2",
+      },
+    },
+    techChallenge1Walkthrough: {
+      sectionTitle: "Tour completo do OncoClass AI",
+      sectionSubtitle:
+        "Demonstracao em tres cenas: exploracao dos dados, treino/otimizacao e leitura dos resultados finais.",
+      videoBadge: "Demo ilustrativa",
+      noteIllustrative:
+        "Fluxo visual para mostrar as funcoes implementadas no notebook e no pipeline principal sem depender da execucao ao vivo no navegador.",
+      sceneLabels: [
+        "Carregamento do dataset e EDA",
+        "Pre-processamento + treino dos modelos",
+        "Metricas finais e artefatos",
+      ],
+      tabs: {
+        dataset: "Dataset + EDA",
+        training: "Treino",
+        results: "Resultados",
+      },
+      controls: {
+        autoplay: "Reproducao automatica",
+        autoplayHint:
+          "Ative para alternar as cenas sozinho; desative para explorar manualmente.",
+        selectSceneHint: "Clique nas abas para acompanhar o tour completo do projeto.",
+      },
+      dataset: {
+        chrome: "OncoClass AI - Dataset e EDA",
+        route: "notebooks/02_colab_pipeline_publico.ipynb + src/eda.py",
+        datasetTitle: "Breast Cancer Wisconsin (Diagnostic)",
+        datasetMeta: "569 amostras · 30 features · classes benigno/maligno",
+        stepLoad: "1) Carrega CSV local ou dataset do sklearn",
+        stepEda: "2) Analisa distribuicao de classes e estatisticas",
+        stepOutliers: "3) Investiga outliers por feature",
+        stepCorrelation: "4) Gera matriz de correlacao e relatorio visual",
+        note: "Saidas desta etapa: relatorio textual/HTML e figuras em reports/figures.",
+      },
+      training: {
+        chrome: "OncoClass AI - Modelagem",
+        route: "src/train.py",
+        title: "Pipeline de treino e validacao",
+        split: "Split estratificado 60/20/20 (treino/validacao/teste).",
+        preprocessing: "StandardScaler + PCA (95% da variancia) antes da modelagem.",
+        modelsTitle: "Modelos avaliados",
+        model1: "Logistic Regression",
+        model2: "Random Forest (GridSearchCV)",
+        model3: "KNN (GridSearchCV)",
+        objective: "Objetivo principal: maximizar recall para triagem.",
+      },
+      results: {
+        chrome: "OncoClass AI - Resultados",
+        route: "reports/final_results.json + reports/models_summary.csv",
+        title: "Comparativo final e melhor modelo",
+        bestModelLabel: "Melhor por recall: Logistic Regression",
+        recallLabel: "Recall: 0.9762",
+        accuracyLabel: "Accuracy: 0.9737",
+        rocAucLabel: "ROC AUC: 0.9954",
+        reportNote:
+          "O pipeline tambem salva matriz de confusao, curvas ROC/PR e analises complementares para leitura rapida.",
+        outputFiles: "Artefatos: JSON, CSV e visualizacoes em reports/figures",
+      },
+    },
+    techChallenge3Walkthrough: {
+      sectionTitle: "Demonstracao web do copiloto clinico",
+      sectionSubtitle:
+        "Animacao de conversa com chat e execucao do fluxo do LangGraph: entrada, geracao, guardrails, auditoria e resposta final.",
+      videoBadge: "Demo ilustrativa",
+      noteIllustrative:
+        "Simulacao visual para explicar a experiencia da pagina web sem depender do backend em tempo real durante a visita.",
+      sceneLabels: [
+        "Usuario envia pergunta e contexto",
+        "LangGraph executa pipeline de decisoes",
+        "Resposta final auditada e segura",
+      ],
+      tabs: {
+        chat: "Chat",
+        graph: "LangGraph",
+        output: "Resultado",
+      },
+      controls: {
+        autoplay: "Reproducao automatica",
+        autoplayHint:
+          "Ative para alternar as cenas automaticamente; desative para navegar manualmente.",
+        selectSceneHint: "Clique nas abas para ver conversa, fluxo e saida final.",
+      },
+      chat: {
+        chrome: "Copiloto Clinico - Chat",
+        route: "teste_visual_navegador/index.html",
+        modelBadge: "Phi-2 fine-tuned + guardrails",
+        prompt: "Contexto clinico",
+        context:
+          "Paciente com diabetes tipo 2, sem sinais de emergencia, em acompanhamento regular.",
+        userQuestion: "Quais orientacoes gerais devo revisar antes da proxima consulta?",
+        assistantDraft:
+          "Gerando resposta educativa contextualizada com foco em seguranca e sem prescricao direta...",
+      },
+      graph: {
+        chrome: "Copiloto Clinico - Fluxo LangGraph",
+        route: "src/langchain_integration/graph_flows.py",
+        title: "Pipeline de decisao clinica",
+        inputNode: "validate_input (valida pergunta e contexto)",
+        generateNode: "generate_response (rascunho da resposta)",
+        guardrailsNode: "apply_guardrails (checagem de risco)",
+        auditNode: "auditor.log_interaction (registro para trilha)",
+        finalNode: "final_response (saida para o usuario)",
+        statusRunning: "Executando",
+      },
+      output: {
+        chrome: "Copiloto Clinico - Resultado",
+        route: "src/security/guardrails.py + src/logging/auditor.py",
+        title: "Saida final com seguranca",
+        guardrailAnalysis:
+          "Nenhuma prescricao direta detectada; manter recomendacao de validacao humana para conduta clinica.",
+        finalAnswer:
+          "Resposta final: revise adesao ao tratamento, rotina alimentar, atividade fisica e sinais de alerta, sempre com acompanhamento profissional.",
+        auditLog:
+          "Auditoria: pergunta, contexto resumido, resultado dos guardrails, timestamp e metadados de execucao registrados.",
+        complianceTag: "Aprovado para apoio educacional",
       },
     },
     lumaGestorWalkthrough: {

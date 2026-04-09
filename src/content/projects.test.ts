@@ -62,6 +62,44 @@ describe("resolveProjectCopy", () => {
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
   });
 
+  it("returns Portuguese copy for Tech Challange 1 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-1");
+    expect(project).toBeDefined();
+    const items = getDictionary("pt").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("câncer de mama");
+    expect(copy.solution.toLowerCase()).toContain("gridsearchcv");
+    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+  });
+
+  it("returns English copy for Tech Challange 1 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-1");
+    expect(project).toBeDefined();
+    const items = getDictionary("en").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("breast cancer");
+    expect(copy.process.toLowerCase()).toContain("eda");
+  });
+
+  it("exposes Tech Challange 1 walkthrough labels in pt and en", () => {
+    expect(ptMessages.projects.techChallenge1Walkthrough.sceneLabels).toHaveLength(3);
+    expect(enMessages.projects.techChallenge1Walkthrough.sceneLabels).toHaveLength(3);
+    expect(ptMessages.projects.techChallenge1Walkthrough.tabs.dataset).toBe("Dataset + EDA");
+    expect(enMessages.projects.techChallenge1Walkthrough.tabs.results).toBe("Results");
+  });
+
+  it("keeps external links configured for Tech Challange 1", () => {
+    const project = projects.find((p) => p.id === "tech-challange-1");
+    expect(project).toBeDefined();
+    expect(project?.featured).toBe(true);
+    expect(project?.links.github).toBe(
+      "https://github.com/BernardoKawano/FIAPTechChallange01"
+    );
+    expect(project?.links.demo).toContain("colab.research.google.com");
+  });
+
   it("returns English copy for Tech Challange 2 from en dictionary items", () => {
     const project = projects.find((p) => p.id === "tech-challange-2");
     expect(project).toBeDefined();
@@ -90,13 +128,6 @@ describe("resolveProjectCopy", () => {
     expect(ptMessages.projects.techChallenge2Walkthrough.tabs.live).toBe("Ao vivo");
   });
 
-  it("returns inline copy for static projects", () => {
-    const staticProject = projects.find((p) => p.id === "ops-ai-triage");
-    expect(staticProject).toBeDefined();
-    const copy = resolveProjectCopy(staticProject!, undefined);
-    expect(copy.title).toBe("AI Ops Triage Pipeline");
-  });
-
   it("keeps external links configured for Tech Challange 2", () => {
     const project = projects.find((p) => p.id === "tech-challange-2");
     expect(project).toBeDefined();
@@ -105,5 +136,81 @@ describe("resolveProjectCopy", () => {
       "https://github.com/BernardoKawano/Tech-Challange-2"
     );
     expect(project?.links.demo).toBe("https://youtu.be/kWew_1jsQjQ");
+  });
+
+  it("returns Portuguese copy for Tech Challange 3 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-3");
+    expect(project).toBeDefined();
+    const items = getDictionary("pt").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("solucao corporativa");
+    expect(copy.summary.toLowerCase()).toContain("guardrails");
+    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+  });
+
+  it("returns English copy for Tech Challange 3 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challange-3");
+    expect(project).toBeDefined();
+    const items = getDictionary("en").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("enterprise solution");
+    expect(copy.process.toLowerCase()).toContain("qlora");
+  });
+
+  it("keeps external links configured for Tech Challange 3", () => {
+    const project = projects.find((p) => p.id === "tech-challange-3");
+    expect(project).toBeDefined();
+    expect(project?.featured).toBe(true);
+    expect(project?.links.github).toBe(
+      "https://github.com/BernardoKawano/Tech-Challange-3"
+    );
+    expect(project?.links.demo).toBe("https://youtu.be/LfE3NgAbXyo");
+  });
+
+  it("returns Portuguese copy for Clinical Monitoring from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "multimodal-clinical-monitoring");
+    expect(project).toBeDefined();
+    const items = getDictionary("pt").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("monitoramento");
+    expect(copy.solution.toLowerCase()).toContain("langgraph");
+    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+    expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("returns English copy for Clinical Monitoring from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "multimodal-clinical-monitoring");
+    expect(project).toBeDefined();
+    const items = getDictionary("en").projects
+      .items as ProjectLocaleItems;
+    const copy = resolveProjectCopy(project!, items);
+    expect(copy.title.toLowerCase()).toContain("multimodal");
+    expect(copy.process.toLowerCase()).toContain("autoencoders");
+    expect(copy.architecture.toLowerCase()).toContain("langgraph");
+  });
+
+  it("keeps external links configured for Clinical Monitoring", () => {
+    const project = projects.find((p) => p.id === "multimodal-clinical-monitoring");
+    expect(project).toBeDefined();
+    expect(project?.featured).toBe(true);
+    expect(project?.links.github).toBe(
+      "https://github.com/BernardoKawano/Tech-Challange-4"
+    );
+    expect(project?.links.demo).toBe("https://youtu.be/xXdvzQmYixA");
+  });
+
+  it("exposes Clinical Monitoring walkthrough labels in pt and en", () => {
+    expect(ptMessages.projects.multimodalClinicalWalkthrough.sceneLabels).toHaveLength(3);
+    expect(enMessages.projects.multimodalClinicalWalkthrough.sceneLabels).toHaveLength(3);
+    expect(ptMessages.projects.multimodalClinicalWalkthrough.tabs.pipeline).toBe("Pipeline");
+  });
+
+  it("exposes Tech Challange 3 walkthrough labels in pt and en", () => {
+    expect(ptMessages.projects.techChallenge3Walkthrough.sceneLabels).toHaveLength(3);
+    expect(enMessages.projects.techChallenge3Walkthrough.sceneLabels).toHaveLength(3);
+    expect(ptMessages.projects.techChallenge3Walkthrough.tabs.graph).toBe("LangGraph");
   });
 });
