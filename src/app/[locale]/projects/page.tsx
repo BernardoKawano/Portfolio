@@ -93,14 +93,24 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   {copy.summary}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((item) => (
+                  {(project.coreStack ?? []).map((item) => (
                     <span
-                      key={`${project.id}-${item}`}
-                      className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
+                      key={`${project.id}-core-${item}`}
+                      className="rounded-pill border border-fg-muted/40 bg-bg-primary/50 px-3 py-1 text-xs font-semibold text-fg-primary"
                     >
                       {item}
                     </span>
                   ))}
+                  {project.stack
+                    .filter((item) => !(project.coreStack ?? []).includes(item))
+                    .map((item) => (
+                      <span
+                        key={`${project.id}-${item}`}
+                        className="rounded-pill border border-line-subtle px-3 py-1 text-xs text-fg-secondary"
+                      >
+                        {item}
+                      </span>
+                    ))}
                 </div>
               </div>
               <div className="grid gap-px bg-line-subtle md:grid-cols-2">
@@ -183,7 +193,7 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   }
                 />
               ) : null}
-              {project.id === "tech-challange-2" ? (
+              {project.id === "tech-challenge-2" ? (
                 <TechChallenge2WalkthroughSection
                   labels={
                     (
@@ -194,7 +204,7 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   }
                 />
               ) : null}
-              {project.id === "tech-challange-1" ? (
+              {project.id === "tech-challenge-1" ? (
                 <TechChallenge1WalkthroughSection
                   labels={
                     (
@@ -205,7 +215,7 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   }
                 />
               ) : null}
-              {project.id === "tech-challange-3" ? (
+              {project.id === "tech-challenge-3" ? (
                 <TechChallenge3WalkthroughSection
                   labels={
                     (
@@ -233,6 +243,12 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
                   {copy.impact}
                 </p>
                 <div className="flex flex-wrap gap-3">
+                  {project.privateRepo ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-pill border border-line-subtle px-4 py-2 text-xs font-semibold text-fg-muted">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                      {labels.privateRepo}
+                    </span>
+                  ) : null}
                   {project.links.github ? (
                     <Link
                       href={project.links.github}

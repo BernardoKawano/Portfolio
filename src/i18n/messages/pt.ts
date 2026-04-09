@@ -22,12 +22,12 @@ export const ptMessages = {
     ],
     projectsTitle: "Projetos Selecionados",
     projectsSubtitle: "Estudos de caso com foco em problema, solução e impacto.",
-    metricsTitle: "Impacto Mensurável",
-    metricsSubtitle: "Resultados reais de projetos reais.",
+    metricsTitle: "Impacto Estimado",
+    metricsSubtitle: "Estimativas baseadas em uso operacional dos projetos.",
     metrics: [
-      { value: "200+", label: "horas de trabalho manual removidas" },
-      { value: "5x", label: "menos etapas nos fluxos principais" },
-      { value: "1k+", label: "documentos processados automaticamente" },
+      { value: "~40h/mês", label: "de trabalho manual evitadas", context: "Estimativa no LumaLector, baseada no fluxo de análise diária de demonstrativos." },
+      { value: "5x", label: "menos etapas nos fluxos principais", context: "Comparação entre processo manual e fluxo automatizado no LumaGestor." },
+      { value: "1k+", label: "documentos processados", context: "Volume acumulado de PDFs analisados durante uso interno do LumaLector." },
     ],
     approachTitle: "Como eu construo",
     approachText:
@@ -78,6 +78,7 @@ export const ptMessages = {
       attributionsHeading: "Atribuições",
       github: "GitHub",
       demo: "Demo",
+      privateRepo: "Repositório privado",
     },
     items: {
       lumalector: {
@@ -90,7 +91,7 @@ export const ptMessages = {
         problem:
           "Demonstrativos em PDF e tarefas de controlo financeiro costumam exigir trabalho manual, exportacoes e alinhamento com calendario fiscal sem um unico fluxo web.",
         solution:
-          "App Next.js (App Router) com upload e analise, historico, calendario, exportacoes (txt, csv, excel, livro caixa) e conversao via multipart, consumindo endpoints REST do FastAPI; sessao com Google OAuth (Auth.js v5 beta) na UI, sem JWT anexado as chamadas ao backend no codigo atual.",
+          "App Next.js (App Router) com upload, analise, historico, calendario e exportacoes, consumindo REST do FastAPI. Escolha de FastAPI sobre Django REST por async nativo e velocidade de iteracao no MVP. Auth via Google OAuth (Auth.js v5 beta) na UI; JWT no backend nao implementado no escopo atual — decisao consciente para priorizar o fluxo de analise.",
         architecture:
           "Browser -> Next.js + Auth.js -> src/lib/api.ts (HTTP) -> FastAPI (ex.: /api/analyze, /api/history, /api/calendar/*, /api/export/*, /api/convert, /api/health)",
         process:
@@ -106,7 +107,7 @@ export const ptMessages = {
         problem:
           "Equipas de obra costumam espalhar pedidos, comprovativos e totais entre ficheiros e planilhas, sem visao unificada do que foi gerado, enviado ou pago nem do saldo por obra.",
         solution:
-          "Wizard em tres etapas (obra no Drive, itens e notas de reembolso, revisao) com PDF e envio para a pasta da obra; Kanban de status com atualizacao da planilha ao pagar; painel por obra com totais, adicionais, recebimentos do cliente e pagamentos a funcionarios via leitura/escrita na planilha.",
+          "Wizard em tres etapas com PDF e envio para a pasta da obra; Kanban de status que atualiza a planilha ao marcar pago; painel por obra via leitura/escrita no Sheets. SPA com Vite em vez de Next.js por ser uma ferramenta interna sem necessidade de SSR ou SEO. Integracao direta com Google Drive/Sheets para evitar backend proprio nesta fase.",
         architecture:
           "Browser (Vite + React Router) -> UI por rotas /, /wizard, /status, /acompanhamento -> integracao com pastas e ficheiros no Google Drive e dados tabulares no Google Sheets; geracao de PDF com @react-pdf/renderer.",
         process:
@@ -131,7 +132,7 @@ export const ptMessages = {
           },
         ],
       },
-      "tech-challange-1": {
+      "tech-challenge-1": {
         title: "OncoClass AI - Suporte a Diagnóstico de Câncer de Mama",
         wordmark: "OncoClass AI",
         summary:
@@ -141,7 +142,7 @@ export const ptMessages = {
         problem:
           "Na triagem de câncer de mama, falsos negativos podem atrasar intervenção clínica; era necessário priorizar sensibilidade na detecção de casos malignos.",
         solution:
-          "Pipeline ponta a ponta em Python com split estratificado (60/20/20), StandardScaler, PCA (95% da variância), otimização por GridSearchCV e avaliação com accuracy, precision, recall, F1 e ROC AUC.",
+          "Pipeline ponta a ponta em Python: split estratificado (60/20/20), StandardScaler, PCA (95% da variancia) e otimizacao por GridSearchCV. Recall priorizado sobre accuracy por ser triagem medica — falso negativo tem custo clinico maior que falso positivo. Modelos classicos (LR, RF, KNN) escolhidos por interpretabilidade e auditabilidade antes de escalar para deep learning.",
         architecture:
           "Estrutura modular em data/, src/, notebooks/ e reports/: train.py orquestra carga de dados, EDA, modelagem, avaliação e exportação de artefatos (JSON, CSV e figuras).",
         process:
@@ -158,7 +159,7 @@ export const ptMessages = {
           },
         ],
       },
-      "tech-challange-2": {
+      "tech-challenge-2": {
         title: "Rota VRP (Vehicle Routing Problem) - Otimizacao de Rotas Medicas",
         summary:
           "Sistema de otimizacao de rotas para distribuicao de suprimentos medicos em Sao Paulo, usando algoritmo genetico com restricoes de prioridade, capacidade e autonomia, visualizacao web em tempo real, mapas interativos com Folium e camada opcional de LLM local via Ollama.",
@@ -167,7 +168,7 @@ export const ptMessages = {
         problem:
           "Hospitais e centros medicos precisam receber suprimentos urgentes; o desafio e minimizar distancia total, priorizar entregas criticas e respeitar limites operacionais dos veiculos.",
         solution:
-          "Um motor de algoritmo genetico evolui populacoes de rotas com selecao, crossover, mutacao e elitismo, usando fitness multiobjetivo com penalidades de capacidade/autonomia e balanceamento; ao final, gera mapa HTML e artefatos operacionais.",
+          "Motor de algoritmo genetico com selecao, crossover, mutacao e elitismo, fitness multiobjetivo com penalidades de capacidade/autonomia. AG escolhido sobre solver exato (OR-Tools) por flexibilidade em restricoes customizadas e escalabilidade para cenarios reais. LLM local (Ollama) em vez de API externa para manter operacao offline e sem custo por chamada.",
         architecture:
           "Arquitetura modular em src/: models, genetic_algorithm, visualization, llm_integration e utilitarios; main.py orquestra o fluxo ponta a ponta, com web_viewer em Streamlit para apresentacao no navegador.",
         process:
@@ -193,7 +194,7 @@ export const ptMessages = {
           },
         ],
       },
-      "tech-challange-3": {
+      "tech-challenge-3": {
         title: "ClinGuard AI",
         summary:
           "Copiloto clinico para apoio educacional que gera respostas contextualizadas, aplica guardrails de seguranca e registra trilha de auditoria, com simulador visual web para demonstracao do fluxo.",
@@ -202,7 +203,7 @@ export const ptMessages = {
         problem:
           "Profissionais e estudantes de saude lidam com muito volume de informacao, pouco tempo para consulta e necessidade de rastreabilidade do que foi consultado.",
         solution:
-          "Pipeline com pergunta e contexto clinico, geracao de resposta por LLM fine-tunada, verificacao de guardrails para riscos e registro completo de auditoria.",
+          "Pipeline com pergunta e contexto clinico, geracao por LLM fine-tunada, guardrails de risco e auditoria completa. Phi-2 (2.7B) escolhido sobre modelos maiores por custo de fine-tuning e possibilidade de rodar em GPU de consumo. QLoRA para treinar apenas ~1% dos parametros, mantendo qualidade proxima de full fine-tuning.",
         architecture:
           "Arquitetura modular em Python (langchain_integration, security, logging, evaluation) com fluxo em grafo via LangGraph e simulador visual web em pagina unica.",
         process:
@@ -234,7 +235,7 @@ export const ptMessages = {
         problem:
           "Equipes clinicas precisam identificar riscos precoces com sinais fragmentados em video, audio e texto, sem um fluxo integrado e operacional.",
         solution:
-          "Pipeline com classificacao por tipo de entrada, analise por midia (instrumentos e anomalias em video, padrao vocal atipico em audio e texto clinico), orquestracao com LangGraph, fusao multimodal, relatorio final e envio opcional de alertas.",
+          "Pipeline com classificacao por tipo de entrada, analise por midia, fusao multimodal via LangGraph e alertas. LangGraph escolhido sobre orquestracao sequencial por suportar roteamento condicional e estado compartilhado entre nos. Autoencoders proprios para anomalia em vez de thresholds fixos, com treino obrigatorio para cada dominio (video cirurgico e audio emocional).",
         architecture:
           "Arquitetura modular em src/video, src/audio, src/azure, src/fusion, src/reports e src/alerts, orquestrada por LangGraph no fluxo classificar -> processar_* -> fusao -> relatorio -> enviar_alertas.",
         process:
@@ -752,6 +753,28 @@ export const ptMessages = {
       "Sistemas escaláveis com decisões orientadas por impacto",
       "Design de processos com contexto de negócio",
     ],
+    timelineTitle: "Trajetória",
+    timeline: [
+      {
+        period: "2024 – presente",
+        title: "AI Engineer — Projetos próprios e freelance",
+        description:
+          "Desenvolvimento de sistemas de IA aplicados a operações reais: análise automatizada de demonstrativos financeiros (LumaLector), gestão de obras (LumaGestor) e pipelines de ML/NLP para desafios técnicos da FIAP.",
+      },
+      {
+        period: "2024 – presente",
+        title: "Pós-graduação em AI Engineering — FIAP",
+        description:
+          "Especialização em engenharia de IA com foco em machine learning, deep learning, NLP, computer vision e sistemas multimodais. Tech Challenges aplicados a problemas reais.",
+      },
+      {
+        period: "Anterior",
+        title: "Experiência profissional mista",
+        description:
+          "Atuação em diferentes contextos profissionais que construíram visão de negócio, operações e necessidades reais de automação — base para a transição a AI Engineering.",
+      },
+    ],
+    resumeDownload: "Baixar currículo",
     approachTitle: "Abordagem",
     inspirationsTitle: "Referências que orientam meu trabalho",
     inspirations: [

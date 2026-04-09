@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
+import { Timeline } from "@/components/sections/about/Timeline";
 
 type AboutPageProps = {
   params: { locale: string };
@@ -49,6 +50,8 @@ export default function AboutPage({ params }: AboutPageProps) {
           </article>
         </div>
       </section>
+
+      <Timeline dictionary={dictionary} />
 
       <section className="mt-section-sm md:mt-section-md">
         <h2 className="text-h2 tracking-tight">

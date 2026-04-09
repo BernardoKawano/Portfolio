@@ -22,12 +22,12 @@ export const enMessages = {
     ],
     projectsTitle: "Selected Projects",
     projectsSubtitle: "Case studies focused on problem, solution, and impact.",
-    metricsTitle: "Measured Impact",
-    metricsSubtitle: "Real outcomes from real projects.",
+    metricsTitle: "Estimated Impact",
+    metricsSubtitle: "Estimates based on operational use of real projects.",
     metrics: [
-      { value: "200+", label: "hours of manual work removed" },
-      { value: "5x", label: "fewer steps in key workflows" },
-      { value: "1k+", label: "documents processed automatically" },
+      { value: "~40h/mo", label: "of manual work avoided", context: "Estimate from LumaLector, based on daily statement analysis workflow." },
+      { value: "5x", label: "fewer steps in key workflows", context: "Comparison between manual process and automated flow in LumaGestor." },
+      { value: "1k+", label: "documents processed", context: "Cumulative PDF volume analyzed during internal use of LumaLector." },
     ],
     approachTitle: "How I work",
     approachText:
@@ -78,6 +78,7 @@ export const enMessages = {
       attributionsHeading: "Credits",
       github: "GitHub",
       demo: "Demo",
+      privateRepo: "Private repository",
     },
     items: {
       lumalector: {
@@ -90,7 +91,7 @@ export const enMessages = {
         problem:
           "PDF statements and financial control work often mean manual effort, exports, and tax-calendar alignment without a single web workflow.",
         solution:
-          "A Next.js app (App Router) with upload and analysis, history, calendar, exports (txt, csv, excel, cash book) and conversion via multipart, calling REST endpoints on FastAPI; Google OAuth (Auth.js v5 beta) for session in the UI, with no JWT attached to backend requests in the current code.",
+          "Next.js app (App Router) with upload, analysis, history, calendar, and exports, calling REST endpoints on FastAPI. FastAPI chosen over Django REST for native async and faster MVP iteration. Auth via Google OAuth (Auth.js v5 beta) on the UI; JWT on backend not implemented in current scope — conscious trade-off to prioritize the analysis flow first.",
         architecture:
           "Browser -> Next.js + Auth.js -> src/lib/api.ts (HTTP) -> FastAPI (e.g. /api/analyze, /api/history, /api/calendar/*, /api/export/*, /api/convert, /api/health)",
         process:
@@ -106,7 +107,7 @@ export const enMessages = {
         problem:
           "Site teams often scatter requests, receipts, and totals across files and spreadsheets, without a single view of what was generated, sent, or paid, or of balances per project.",
         solution:
-          "A three-step wizard (project in Drive, line items and reimbursement notes, review) with PDF output into the project folder; a status Kanban that updates the sheet when paid; a per-project panel for totals, extras, client receipts, and payroll, reading and writing the spreadsheet.",
+          "Three-step wizard with PDF output into the project folder; Kanban board that updates the sheet on payment; per-project panel via Sheets read/write. Vite SPA chosen over Next.js since this is an internal tool with no SSR or SEO needs. Direct Google Drive/Sheets integration to avoid a custom backend in this phase.",
         architecture:
           "Browser (Vite + React Router) -> UI on routes /, /wizard, /status, /acompanhamento -> Google Drive folders/files and tabular data in Google Sheets; PDF generation with @react-pdf/renderer.",
         process:
@@ -131,7 +132,7 @@ export const enMessages = {
           },
         ],
       },
-      "tech-challange-1": {
+      "tech-challenge-1": {
         title: "OncoClass AI - Breast Cancer Diagnostic Support",
         wordmark: "OncoClass AI",
         summary:
@@ -141,7 +142,7 @@ export const enMessages = {
         problem:
           "In breast-cancer triage, false negatives can delay clinical intervention; the project needed to prioritize sensitivity for malignant-case detection.",
         solution:
-          "End-to-end Python pipeline with stratified split (60/20/20), StandardScaler, PCA (95% explained variance), GridSearchCV optimization, and evaluation using accuracy, precision, recall, F1, and ROC AUC.",
+          "End-to-end Python pipeline: stratified split (60/20/20), StandardScaler, PCA (95% variance), GridSearchCV optimization. Recall prioritized over accuracy because this is medical triage — false negatives carry higher clinical cost. Classical models (LR, RF, KNN) chosen for interpretability and auditability before scaling to deep learning.",
         architecture:
           "Modular structure across data/, src/, notebooks/, and reports/: train.py orchestrates data loading, EDA, modeling, evaluation, and artifact export (JSON, CSV, and figures).",
         process:
@@ -158,7 +159,7 @@ export const enMessages = {
           },
         ],
       },
-      "tech-challange-2": {
+      "tech-challenge-2": {
         title: "Rota VRP (Vehicle Routing Problem) - Medical Route Optimization",
         summary:
           "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, real-time web visualization, interactive Folium maps, and optional local LLM support via Ollama.",
@@ -167,7 +168,7 @@ export const enMessages = {
         problem:
           "Hospitals and medical centers require urgent supplies; the challenge is to minimize total distance, prioritize critical deliveries, and respect vehicle operational constraints.",
         solution:
-          "A genetic-algorithm engine evolves route populations with selection, crossover, mutation, and elitism, using a multi-objective fitness function with capacity/range penalties and balancing; it outputs an HTML map and operational artifacts.",
+          "Genetic-algorithm engine with selection, crossover, mutation, elitism, and multi-objective fitness with capacity/range penalties. GA chosen over exact solvers (OR-Tools) for flexibility with custom constraints and real-world scalability. Local LLM (Ollama) instead of external API to keep operations offline and cost-free per call.",
         architecture:
           "Modular architecture under src/ split across data models, optimization engine, visualization, LLM integration, and utilities; main.py orchestrates the end-to-end flow, while a Streamlit web_viewer provides browser-based presentation.",
         process:
@@ -193,7 +194,7 @@ export const enMessages = {
           },
         ],
       },
-      "tech-challange-3": {
+      "tech-challenge-3": {
         title: "Safe Clinical Copilot - Enterprise Solution",
         summary:
           "A clinical copilot for educational support that generates contextualized responses, applies safety guardrails, and keeps an audit trail, with a web visual simulator to demonstrate the flow.",
@@ -202,7 +203,7 @@ export const enMessages = {
         problem:
           "Healthcare professionals and students face high information volume, limited time for consultation, and the need to keep traceable records of what was reviewed.",
         solution:
-          "A pipeline that takes clinical question plus context, generates an answer with a fine-tuned LLM, checks risks through guardrails, and stores complete audit logs.",
+          "Pipeline taking clinical question plus context, generating answers with a fine-tuned LLM, checking risks through guardrails, and storing audit logs. Phi-2 (2.7B) chosen over larger models for fine-tuning cost and consumer-GPU feasibility. QLoRA to train ~1% of parameters while maintaining near-full fine-tuning quality.",
         architecture:
           "Modular Python architecture (langchain_integration, security, logging, evaluation) with a graph flow powered by LangGraph plus a single-page web visual simulator.",
         process:
@@ -233,7 +234,7 @@ export const enMessages = {
         problem:
           "Clinical teams need early risk identification from fragmented video, audio, and text signals, but often lack an integrated operational workflow.",
         solution:
-          "A pipeline with input-type classification, media-specific analysis (video instruments/anomalies, atypical vocal patterns in audio, and clinical text), multimodal fusion, final reporting, and optional alert dispatch.",
+          "Pipeline with input-type classification, media-specific analysis, multimodal fusion via LangGraph, and alert dispatch. LangGraph chosen over sequential orchestration for conditional routing and shared state between nodes. Custom autoencoders for anomaly detection instead of fixed thresholds, with mandatory training per domain (surgical video and emotional audio).",
         architecture:
           "Modular architecture across src/video, src/audio, src/azure, src/fusion, src/reports, and src/alerts, orchestrated by LangGraph in the flow classify -> process_* -> fusion -> report -> send_alerts.",
         process:
@@ -750,6 +751,28 @@ export const enMessages = {
       "Scalable systems built around measurable impact",
       "Process design with business context",
     ],
+    timelineTitle: "Background",
+    timeline: [
+      {
+        period: "2024 – present",
+        title: "AI Engineer — Own projects & freelance",
+        description:
+          "Building AI systems for real operations: automated financial statement analysis (LumaLector), construction project management (LumaGestor), and ML/NLP pipelines for FIAP tech challenges.",
+      },
+      {
+        period: "2024 – present",
+        title: "Post-grad in AI Engineering — FIAP",
+        description:
+          "Specialization in AI engineering covering machine learning, deep learning, NLP, computer vision, and multimodal systems. Tech Challenges applied to real-world problems.",
+      },
+      {
+        period: "Previous",
+        title: "Mixed professional experience",
+        description:
+          "Roles across different professional contexts that built business awareness, operational thinking, and a clear understanding of where automation creates value.",
+      },
+    ],
+    resumeDownload: "Download resume",
     approachTitle: "Approach",
     inspirationsTitle: "References that shape my work",
     inspirations: [

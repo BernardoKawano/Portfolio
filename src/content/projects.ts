@@ -34,16 +34,20 @@ export type LocalizedProject = {
   featured: boolean;
   localeKey: string;
   stack: string[];
+  coreStack?: string[];
   links: ProjectLinks;
   logo?: ProjectLogo;
+  privateRepo?: boolean;
 };
 
 export type StaticProject = ProjectCopy & {
   id: string;
   featured: boolean;
   stack: string[];
+  coreStack?: string[];
   links: ProjectLinks;
   logo?: ProjectLogo;
+  privateRepo?: boolean;
 };
 
 export type Project = StaticProject | LocalizedProject;
@@ -52,9 +56,9 @@ export type Project = StaticProject | LocalizedProject;
 export type ProjectLocaleItems = {
   lumalector: ProjectCopy;
   lumagestor: ProjectCopy;
-  "tech-challange-2": ProjectCopy;
-  "tech-challange-3": ProjectCopy;
-  "tech-challange-1": ProjectCopy;
+  "tech-challenge-2": ProjectCopy;
+  "tech-challenge-3": ProjectCopy;
+  "tech-challenge-1": ProjectCopy;
   "multimodal-clinical-monitoring": ProjectCopy;
 };
 
@@ -90,6 +94,8 @@ export const projects: Project[] = [
     id: "lumalector",
     featured: true,
     localeKey: "lumalector",
+    privateRepo: true,
+    coreStack: ["Next.js", "TypeScript", "FastAPI", "Auth.js"],
     stack: [
       "Next.js 16",
       "React 19",
@@ -104,14 +110,14 @@ export const projects: Project[] = [
     },
     links: {
       caseStudy: "/pt/projects#lumalector",
-      github: "",
-      demo: "",
     },
   },
   {
     id: "lumagestor",
     featured: true,
     localeKey: "lumagestor",
+    privateRepo: true,
+    coreStack: ["React", "TypeScript", "Google Sheets API", "React PDF"],
     stack: [
       "Vite 7",
       "React 19",
@@ -125,14 +131,13 @@ export const projects: Project[] = [
     },
     links: {
       caseStudy: "/pt/projects#lumagestor",
-      github: "",
-      demo: "",
     },
   },
   {
-    id: "tech-challange-1",
+    id: "tech-challenge-1",
     featured: true,
-    localeKey: "tech-challange-1",
+    localeKey: "tech-challenge-1",
+    coreStack: ["Python", "Scikit-learn", "Pandas", "SHAP"],
     stack: [
       "Python 3.10+",
       "Pandas",
@@ -148,15 +153,16 @@ export const projects: Project[] = [
       src: "/images/logo-onco-ai.png",
     },
     links: {
-      caseStudy: "/pt/projects#tech-challange-1",
+      caseStudy: "/pt/projects#tech-challenge-1",
       github: "https://github.com/BernardoKawano/FIAPTechChallange01",
       demo: "https://colab.research.google.com/github/BernardoKawano/FIAPTechChallange01/blob/main/tech-challenge-fase1/notebooks/02_colab_pipeline_publico.ipynb",
     },
   },
   {
-    id: "tech-challange-2",
+    id: "tech-challenge-2",
     featured: true,
-    localeKey: "tech-challange-2",
+    localeKey: "tech-challenge-2",
+    coreStack: ["Python", "DEAP", "Streamlit", "Ollama"],
     stack: [
       "Python 3.8+",
       "NumPy",
@@ -182,15 +188,16 @@ export const projects: Project[] = [
       src: "/images/logo-rota-vrp.png",
     },
     links: {
-      caseStudy: "/pt/projects#tech-challange-2",
+      caseStudy: "/pt/projects#tech-challenge-2",
       github: "https://github.com/BernardoKawano/Tech-Challange-2",
       demo: "https://youtu.be/kWew_1jsQjQ",
     },
   },
   {
-    id: "tech-challange-3",
+    id: "tech-challenge-3",
     featured: true,
-    localeKey: "tech-challange-3",
+    localeKey: "tech-challenge-3",
+    coreStack: ["PyTorch", "QLoRA", "LangGraph", "Phi-2"],
     stack: [
       "Python",
       "PyTorch",
@@ -212,7 +219,7 @@ export const projects: Project[] = [
       src: "/images/logo-clinguard-ai.png",
     },
     links: {
-      caseStudy: "/pt/projects#tech-challange-3",
+      caseStudy: "/pt/projects#tech-challenge-3",
       github: "https://github.com/BernardoKawano/Tech-Challange-3",
       demo: "https://youtu.be/LfE3NgAbXyo",
     },
@@ -221,6 +228,7 @@ export const projects: Project[] = [
     id: "multimodal-clinical-monitoring",
     featured: true,
     localeKey: "multimodal-clinical-monitoring",
+    coreStack: ["LangGraph", "YOLOv8", "PyTorch", "OpenAI API"],
     stack: [
       "Python",
       "LangGraph",

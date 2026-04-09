@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/Card";
 
-type Metric = { value: string; label: string };
+type Metric = { value: string; label: string; context?: string };
 
 type ImpactMetricsProps = {
   dictionary: Record<string, any>;
@@ -49,11 +49,15 @@ export function ImpactMetrics({ dictionary }: ImpactMetricsProps) {
             transition={{ duration: 0.28 }}
             className="p-6"
           >
-            {/* TODO: replace placeholder values with verified project data */}
             <p className="text-h1 tracking-tight">{metric.value}</p>
             <p className="mt-2 text-caption text-fg-secondary">
               {metric.label}
             </p>
+            {metric.context ? (
+              <p className="mt-2 text-xs leading-relaxed text-fg-muted">
+                {metric.context}
+              </p>
+            ) : null}
           </Card>
         ))}
       </motion.div>

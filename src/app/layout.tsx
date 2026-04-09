@@ -22,6 +22,24 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "Bernardo Kawano",
+      url: siteConfig.siteUrl,
+    },
+    {
+      "@type": "Person",
+      name: "Bernardo Kawano",
+      jobTitle: "AI Engineer",
+      url: siteConfig.siteUrl,
+      sameAs: [siteConfig.links.github, siteConfig.links.linkedin],
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

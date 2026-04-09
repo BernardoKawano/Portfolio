@@ -57,17 +57,17 @@ export function FeaturedProjects({
             isLocalizedProject(project) ? projectItems : undefined
           );
           const displayTitle = copy.wordmark ?? copy.title;
-          const visibleStack = project.stack.slice(0, 6);
+          const visibleStack = project.coreStack ?? project.stack.slice(0, 4);
           const remainingStackCount = Math.max(0, project.stack.length - visibleStack.length);
           const logo = project.logo;
           const logoScaleClass =
             project.id === "lumagestor"
               ? "scale-[1.26]"
-              : project.id === "tech-challange-1"
+              :             project.id === "tech-challenge-1"
                 ? "scale-[1.30]"
-                : project.id === "tech-challange-2"
+                : project.id === "tech-challenge-2"
                   ? "scale-[1.35]"
-                : project.id === "tech-challange-3"
+                : project.id === "tech-challenge-3"
                   ? "scale-[1.35]"
                 : project.id === "multimodal-clinical-monitoring"
                   ? "scale-[1.28]"

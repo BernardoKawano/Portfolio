@@ -51,30 +51,30 @@ describe("resolveProjectCopy", () => {
     expect(copy.architecture.toLowerCase()).toContain("vite");
   });
 
-  it("returns Portuguese copy for Tech Challange 2 from pt dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-2");
+  it("returns Portuguese copy for Tech Challenge 2 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-2");
     expect(project).toBeDefined();
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
-    expect(copy.title.toLowerCase()).toContain("suprimentos medicos");
+    expect(copy.title.toLowerCase()).toContain("rotas medicas");
     expect(copy.summary.toLowerCase()).toContain("algoritmo genetico");
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
   });
 
-  it("returns Portuguese copy for Tech Challange 1 from pt dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-1");
+  it("returns Portuguese copy for Tech Challenge 1 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-1");
     expect(project).toBeDefined();
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("câncer de mama");
     expect(copy.solution.toLowerCase()).toContain("gridsearchcv");
-    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+    expect(copy.impact.toLowerCase()).toContain("triagem");
   });
 
-  it("returns English copy for Tech Challange 1 from en dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-1");
+  it("returns English copy for Tech Challenge 1 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-1");
     expect(project).toBeDefined();
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
@@ -83,15 +83,15 @@ describe("resolveProjectCopy", () => {
     expect(copy.process.toLowerCase()).toContain("eda");
   });
 
-  it("exposes Tech Challange 1 walkthrough labels in pt and en", () => {
+  it("exposes Tech Challenge 1 walkthrough labels in pt and en", () => {
     expect(ptMessages.projects.techChallenge1Walkthrough.sceneLabels).toHaveLength(3);
     expect(enMessages.projects.techChallenge1Walkthrough.sceneLabels).toHaveLength(3);
     expect(ptMessages.projects.techChallenge1Walkthrough.tabs.dataset).toBe("Dataset + EDA");
     expect(enMessages.projects.techChallenge1Walkthrough.tabs.results).toBe("Results");
   });
 
-  it("keeps external links configured for Tech Challange 1", () => {
-    const project = projects.find((p) => p.id === "tech-challange-1");
+  it("keeps external links configured for Tech Challenge 1", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-1");
     expect(project).toBeDefined();
     expect(project?.featured).toBe(true);
     expect(project?.links.github).toBe(
@@ -100,8 +100,8 @@ describe("resolveProjectCopy", () => {
     expect(project?.links.demo).toContain("colab.research.google.com");
   });
 
-  it("returns English copy for Tech Challange 2 from en dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-2");
+  it("returns English copy for Tech Challenge 2 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-2");
     expect(project).toBeDefined();
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
@@ -122,14 +122,14 @@ describe("resolveProjectCopy", () => {
     expect(enMessages.projects.lumaDemos.controls.autoplay).toBe("Autoplay");
   });
 
-  it("exposes Tech Challange 2 walkthrough labels in pt and en", () => {
+  it("exposes Tech Challenge 2 walkthrough labels in pt and en", () => {
     expect(ptMessages.projects.techChallenge2Walkthrough.sceneLabels).toHaveLength(5);
     expect(enMessages.projects.techChallenge2Walkthrough.sceneLabels).toHaveLength(5);
     expect(ptMessages.projects.techChallenge2Walkthrough.tabs.live).toBe("Ao vivo");
   });
 
-  it("keeps external links configured for Tech Challange 2", () => {
-    const project = projects.find((p) => p.id === "tech-challange-2");
+  it("keeps external links configured for Tech Challenge 2", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-2");
     expect(project).toBeDefined();
     expect(project?.featured).toBe(true);
     expect(project?.links.github).toBe(
@@ -138,19 +138,19 @@ describe("resolveProjectCopy", () => {
     expect(project?.links.demo).toBe("https://youtu.be/kWew_1jsQjQ");
   });
 
-  it("returns Portuguese copy for Tech Challange 3 from pt dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-3");
+  it("returns Portuguese copy for Tech Challenge 3 from pt dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-3");
     expect(project).toBeDefined();
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
-    expect(copy.title.toLowerCase()).toContain("solucao corporativa");
+    expect(copy.title.toLowerCase()).toContain("clinguard");
     expect(copy.summary.toLowerCase()).toContain("guardrails");
-    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+    expect(copy.impact.toLowerCase()).toContain("copiloto");
   });
 
-  it("returns English copy for Tech Challange 3 from en dictionary items", () => {
-    const project = projects.find((p) => p.id === "tech-challange-3");
+  it("returns English copy for Tech Challenge 3 from en dictionary items", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-3");
     expect(project).toBeDefined();
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
@@ -159,8 +159,8 @@ describe("resolveProjectCopy", () => {
     expect(copy.process.toLowerCase()).toContain("qlora");
   });
 
-  it("keeps external links configured for Tech Challange 3", () => {
-    const project = projects.find((p) => p.id === "tech-challange-3");
+  it("keeps external links configured for Tech Challenge 3", () => {
+    const project = projects.find((p) => p.id === "tech-challenge-3");
     expect(project).toBeDefined();
     expect(project?.featured).toBe(true);
     expect(project?.links.github).toBe(
@@ -175,9 +175,9 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
-    expect(copy.title.toLowerCase()).toContain("monitoramento");
+    expect(copy.title.toLowerCase()).toContain("medwatch");
     expect(copy.solution.toLowerCase()).toContain("langgraph");
-    expect(copy.impact.toLowerCase()).toContain("impacto qualitativo");
+    expect(copy.impact.toLowerCase()).toContain("video");
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
   });
 
@@ -187,7 +187,7 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
-    expect(copy.title.toLowerCase()).toContain("multimodal");
+    expect(copy.title.toLowerCase()).toContain("medwatch");
     expect(copy.process.toLowerCase()).toContain("autoencoders");
     expect(copy.architecture.toLowerCase()).toContain("langgraph");
   });
@@ -208,7 +208,7 @@ describe("resolveProjectCopy", () => {
     expect(ptMessages.projects.multimodalClinicalWalkthrough.tabs.pipeline).toBe("Pipeline");
   });
 
-  it("exposes Tech Challange 3 walkthrough labels in pt and en", () => {
+  it("exposes Tech Challenge 3 walkthrough labels in pt and en", () => {
     expect(ptMessages.projects.techChallenge3Walkthrough.sceneLabels).toHaveLength(3);
     expect(enMessages.projects.techChallenge3Walkthrough.sceneLabels).toHaveLength(3);
     expect(ptMessages.projects.techChallenge3Walkthrough.tabs.graph).toBe("LangGraph");
