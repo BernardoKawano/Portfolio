@@ -30,6 +30,7 @@ import {
   MultimodalClinicalWalkthroughSection,
   type MultimodalClinicalWalkthroughLabels,
 } from "@/components/projects/clinical/MultimodalClinicalWalkthrough";
+import { ProjectHashScroll } from "@/components/projects/ProjectHashScroll";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
 type ProjectsPageProps = {
@@ -50,6 +51,7 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
 
   return (
     <div className="section-shell py-section-md md:py-section-lg">
+      <ProjectHashScroll />
       <header className="mb-section-sm max-w-3xl">
         <h1 className="text-h1 tracking-tight">{dictionary.projects.title}</h1>
         <p className="mt-3 text-body text-fg-secondary">
@@ -66,7 +68,7 @@ export default function ProjectsPage({ params }: ProjectsPageProps) {
             <article
               key={project.id}
               id={project.id}
-              className="premium-card overflow-hidden"
+              className="premium-card scroll-mt-24 overflow-hidden md:scroll-mt-28"
             >
               <div className="border-b border-line-subtle p-7 md:p-9">
                 {project.logo ? (

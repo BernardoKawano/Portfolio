@@ -131,6 +131,8 @@ export function FeaturedProjects({
               </div>
               <Link
                 href={`/${locale}/projects#${project.id}`}
+                scroll={false}
+                prefetch={false}
                 className="mt-6 inline-block text-caption font-semibold underline decoration-line-subtle underline-offset-4 transition-colors duration-fast hover:decoration-fg-muted"
               >
                 {dictionary.projects.labels.caseStudy}
