@@ -79,6 +79,8 @@ export const enMessages = {
       github: "GitHub",
       demo: "Demo",
       privateRepo: "Private repository",
+      expandCaseStudy: "View full case study",
+      collapseCaseStudy: "Collapse case study",
     },
     items: {
       lumalector: {

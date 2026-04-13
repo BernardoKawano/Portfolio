@@ -79,6 +79,8 @@ export const ptMessages = {
       github: "GitHub",
       demo: "Demo",
       privateRepo: "Repositório privado",
+      expandCaseStudy: "Ver estudo completo",
+      collapseCaseStudy: "Recolher estudo",
     },
     items: {
       lumalector: {
