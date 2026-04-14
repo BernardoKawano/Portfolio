@@ -756,6 +756,8 @@ export const ptMessages = {
       "Design de processos com contexto de negócio",
     ],
     timelineTitle: "Trajetória",
+    certificateView: "Visualizar certificado",
+    certificateDownload: "Baixar certificado",
     timeline: [
       {
         period: "2024 – presente",
@@ -768,6 +770,20 @@ export const ptMessages = {
         title: "Pós-graduação em AI Engineering — FIAP",
         description:
           "Especialização em engenharia de IA com foco em machine learning, deep learning, NLP, computer vision e sistemas multimodais. Tech Challenges aplicados a problemas reais.",
+      },
+      {
+        period: "2024",
+        title: "MBA em Inteligência Artificial para Negócios — Faculdade Exame",
+        description:
+          "Conclusão do MBA em Inteligência Artificial para Negócios da Faculdade Exame (nível de especialização), com foco em aplicação estratégica de IA no contexto empresarial.",
+        certificateUrl: "/certificates/mba-ia-negocios-exame.pdf",
+      },
+      {
+        period: "2023",
+        title: "CS50x — Harvard University",
+        description:
+          "Conclusão do CS50x (Introduction to Computer Science), com problem sets, labs e projeto final em fundamentos de ciência da computação.",
+        certificateUrl: "/certificates/cs50x-harvard.pdf",
       },
       {
         period: "Anterior",
@@ -784,17 +800,19 @@ export const ptMessages = {
         author: "Steve Jobs",
         quote: "Simple can be harder than complex.",
         insight:
-          "Por isso eu construo sistemas de IA que removem atrito em vez de adicionar ruído.",
+          "A maioria das soluções com IA hoje só desloca a complexidade de lugar. Simplicidade não é sobre deixar algo menor, é sobre entender profundamente o sistema a ponto de remover tudo o que não deveria existir.",
       },
       {
         author: "Jony Ive",
         quote: "It's about bringing order to complexity.",
-        insight: "De fluxos quebrados para sistemas realmente utilizáveis.",
+        insight:
+          "Eu trabalho para que o sistema funcione apesar da complexidade, não por causa dela. Um bom sistema absorve o caos internamente e entrega uma experiência que parece simples, mesmo quando não é.",
       },
       {
         author: "Dieter Rams",
         quote: "Good design makes a product understandable.",
-        insight: "O mesmo deve ser verdade para automação.",
+        insight:
+          "Se precisa explicar demais, já falhou. Clareza não é estética, é funcionalidade. Automação não deveria exigir adaptação humana constante, mas sim se alinhar ao comportamento natural de quem usa.",
       },
     ],
     approachItems: [

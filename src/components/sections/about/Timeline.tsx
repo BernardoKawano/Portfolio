@@ -7,6 +7,7 @@ type TimelineEntry = {
   period: string;
   title: string;
   description: string;
+  certificateUrl?: string;
 };
 
 type TimelineProps = {
@@ -51,6 +52,17 @@ export function Timeline({ dictionary }: TimelineProps) {
               <p className="mt-2 max-w-2xl text-caption leading-relaxed text-fg-secondary">
                 {entry.description}
               </p>
+              {entry.certificateUrl ? (
+                <div className="mt-3">
+                  <a
+                    href={entry.certificateUrl}
+                    download
+                    className="inline-flex items-center rounded-pill border border-line-subtle px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-fg-secondary transition-colors duration-fast hover:border-fg-muted hover:text-fg-primary"
+                  >
+                    {dictionary.about.certificateView}
+                  </a>
+                </div>
+              ) : null}
             </motion.li>
           ))}
         </ol>

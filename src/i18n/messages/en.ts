@@ -754,6 +754,8 @@ export const enMessages = {
       "Process design with business context",
     ],
     timelineTitle: "Background",
+    certificateView: "View certificate",
+    certificateDownload: "Download certificate",
     timeline: [
       {
         period: "2024 – present",
@@ -766,6 +768,20 @@ export const enMessages = {
         title: "Post-grad in AI Engineering — FIAP",
         description:
           "Specialization in AI engineering covering machine learning, deep learning, NLP, computer vision, and multimodal systems. Tech Challenges applied to real-world problems.",
+      },
+      {
+        period: "2024",
+        title: "MBA in Artificial Intelligence for Business — Faculdade Exame",
+        description:
+          "Completed Faculdade Exame's MBA in Artificial Intelligence for Business (specialization level), focused on strategic AI application in business contexts.",
+        certificateUrl: "/certificates/mba-ia-negocios-exame.pdf",
+      },
+      {
+        period: "2023",
+        title: "CS50x — Harvard University",
+        description:
+          "Completed CS50x (Introduction to Computer Science), including problem sets, labs, and a final project covering core computer science foundations.",
+        certificateUrl: "/certificates/cs50x-harvard.pdf",
       },
       {
         period: "Previous",
@@ -782,17 +798,19 @@ export const enMessages = {
         author: "Steve Jobs",
         quote: "Simple can be harder than complex.",
         insight:
-          "That's why I build AI systems that remove friction instead of adding noise.",
+          "Most AI solutions today only move complexity around. Simplicity is not about making something smaller; it is about understanding the system deeply enough to remove everything that should not exist.",
       },
       {
         author: "Jony Ive",
         quote: "It's about bringing order to complexity.",
-        insight: "From broken workflows to usable systems.",
+        insight:
+          "I work so the system performs despite complexity, not because of it. A good system absorbs chaos internally and delivers an experience that feels simple, even when it is not.",
       },
       {
         author: "Dieter Rams",
         quote: "Good design makes a product understandable.",
-        insight: "The same should be true for automation.",
+        insight:
+          "If it needs too much explanation, it has already failed. Clarity is not aesthetics; it is functionality. Automation should not demand constant human adaptation, but align with natural user behavior.",
       },
     ],
     approachItems: [
