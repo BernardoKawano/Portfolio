@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navItems } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { isLocaleHomePath } from "@/lib/navHome";
 import type { Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -16,14 +18,26 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  function onHomeNavClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (!pathname || !isLocaleHomePath(pathname, locale)) return;
+    e.preventDefault();
+    const home = `/${locale}`;
+    if (typeof window !== "undefined" && window.location.hash) {
+      window.history.replaceState(null, "", home);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line-subtle/80 bg-bg-primary/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-line-subtle/80 bg-bg-primary/90 supports-[backdrop-filter]:bg-bg-primary/75 backdrop-blur-md">
         <div className="section-shell py-4">
           <div className="flex items-center justify-between gap-4">
             <Link
               href={`/${locale}`}
+              onClick={onHomeNavClick}
               className="text-sm font-semibold tracking-wide"
             >
               {siteConfig.name}
@@ -33,6 +47,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
                 <Link
                   key={item.key}
                   href={`/${locale}${item.href}`}
+                  onClick={item.href === "" ? onHomeNavClick : undefined}
                   className="text-caption text-fg-secondary transition-colors duration-fast hover:text-fg-primary"
                 >
                   {dictionary.nav[item.key.split(".")[1]]}

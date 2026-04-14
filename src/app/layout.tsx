@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
+import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 
 export const metadata: Metadata = {
   title: {
@@ -53,7 +54,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <WebVitalsReporter />
+      </body>
     </html>
   );
 }

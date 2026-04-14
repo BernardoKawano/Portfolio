@@ -1,7 +1,8 @@
 import { enMessages } from "@/i18n/messages/en";
 import { ptMessages } from "@/i18n/messages/pt";
+import { LOCALE_CODES } from "@/lib/locale-codes";
 
-export const locales = ["pt", "en"] as const;
+export const locales = LOCALE_CODES;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "pt";

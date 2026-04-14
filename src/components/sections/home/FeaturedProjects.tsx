@@ -1,7 +1,5 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   isLocalizedProject,
   projects,
@@ -27,30 +25,15 @@ export function FeaturedProjects({
 
   return (
     <section className="section-shell py-section-md md:py-section-lg">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.35 }}
-        className="mb-10"
-      >
+      <div className="mb-10">
         <h2 className="text-h1 tracking-tight">
           {dictionary.home.projectsTitle}
         </h2>
         <p className="mt-3 text-body text-fg-secondary">
           {dictionary.home.projectsSubtitle}
         </p>
-      </motion.div>
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        variants={{
-          hidden: { opacity: 1 },
-          show: { opacity: 1, transition: { staggerChildren: 0.1 } },
-        }}
-        className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
-      >
+      </div>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {featured.map((project) => {
           const copy = resolveProjectCopy(
             project,
@@ -73,25 +56,17 @@ export function FeaturedProjects({
                   ? "scale-[1.28]"
                 : "scale-95";
           return (
-            <Card
-              key={project.id}
-              hover
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                show: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col p-6 md:p-7"
-            >
+            <Card key={project.id} hover className="flex flex-col p-6 md:p-7">
               {logo ? (
                 <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <div className="flex h-10 w-[12.5rem] max-w-full items-center">
-                    <img
+                    <Image
                       src={logo.src}
                       alt=""
                       width={176}
                       height={40}
+                      sizes="(max-width: 1280px) 45vw, 200px"
+                      priority={featured[0]?.id === project.id}
                       aria-hidden
                       className={`h-9 w-auto max-w-full shrink-0 origin-left object-contain object-left dark:brightness-0 dark:invert ${logoScaleClass}`}
                     />
@@ -132,15 +107,14 @@ export function FeaturedProjects({
               <Link
                 href={`/${locale}/projects#${project.id}`}
                 scroll={false}
-                prefetch={false}
-                className="mt-6 inline-block text-caption font-semibold underline decoration-line-subtle underline-offset-4 transition-colors duration-fast hover:decoration-fg-muted"
+                className="mt-6 inline-flex items-center rounded-lg border border-line-subtle bg-bg-primary px-4 py-2.5 text-caption font-semibold text-fg-primary transition-colors duration-fast hover:border-fg-muted hover:bg-bg-surface"
               >
                 {dictionary.projects.labels.caseStudy}
               </Link>
             </Card>
           );
         })}
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run clean:next && npx -y node@20 node_modules/next/dist/bin/next dev",
+    "dev:node20": "npx -y node@20 node_modules/next/dist/bin/next dev",
     "build": "next build",
     "start": "next start",
+    "clean:next": "node -e \"require('node:fs').rmSync('.next',{recursive:true,force:true})\"",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "perf:ci": "npm run lint && npm run test && npm run build",
+    "perf:lighthouse:pt": "lighthouse http://localhost:3000/pt --only-categories=performance --chrome-flags=\"--headless --no-sandbox\" --output=json --output-path=./external/lighthouse-pt.json",
+    "perf:lighthouse:projects": "lighthouse http://localhost:3000/pt/projects --only-categories=performance --chrome-flags=\"--headless --no-sandbox\" --output=json --output-path=./external/lighthouse-projects.json"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -16,7 +21,8 @@
     "next": "^13.5.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^2.5.5",
+    "web-vitals": "^5.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",

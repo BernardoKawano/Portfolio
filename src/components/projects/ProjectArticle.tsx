@@ -1,32 +1,59 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { useId, useLayoutEffect, useState } from "react";
 import type { Project, ProjectCopy } from "@/content/projects";
-import {
-  LumaGestorWalkthroughSection,
-  type LumaGestorWalkthroughLabels,
-} from "@/components/projects/luma/LumaGestorWalkthrough";
-import {
-  LumaProductDemosSection,
-  type LumaProductDemosLabels,
-} from "@/components/projects/luma/LumaProductDemos";
-import {
-  TechChallenge1WalkthroughSection,
-  type TechChallenge1WalkthroughLabels,
-} from "@/components/projects/tech/TechChallenge1Walkthrough";
-import {
-  TechChallenge2WalkthroughSection,
-  type TechChallenge2WalkthroughLabels,
-} from "@/components/projects/tech/TechChallenge2Walkthrough";
-import {
-  TechChallenge3WalkthroughSection,
-  type TechChallenge3WalkthroughLabels,
-} from "@/components/projects/tech/TechChallenge3Walkthrough";
-import {
-  MultimodalClinicalWalkthroughSection,
-  type MultimodalClinicalWalkthroughLabels,
-} from "@/components/projects/clinical/MultimodalClinicalWalkthrough";
+import type { LumaGestorWalkthroughLabels } from "@/components/projects/luma/LumaGestorWalkthrough";
+import type { LumaProductDemosLabels } from "@/components/projects/luma/LumaProductDemos";
+import type { TechChallenge1WalkthroughLabels } from "@/components/projects/tech/TechChallenge1Walkthrough";
+import type { TechChallenge2WalkthroughLabels } from "@/components/projects/tech/TechChallenge2Walkthrough";
+import type { TechChallenge3WalkthroughLabels } from "@/components/projects/tech/TechChallenge3Walkthrough";
+import type { MultimodalClinicalWalkthroughLabels } from "@/components/projects/clinical/MultimodalClinicalWalkthrough";
+
+const LumaGestorWalkthroughSection = dynamic(
+  () =>
+    import("@/components/projects/luma/LumaGestorWalkthrough").then(
+      (mod) => mod.LumaGestorWalkthroughSection,
+    ),
+  { ssr: false, loading: () => null },
+);
+const LumaProductDemosSection = dynamic(
+  () =>
+    import("@/components/projects/luma/LumaProductDemos").then(
+      (mod) => mod.LumaProductDemosSection,
+    ),
+  { ssr: false, loading: () => null },
+);
+const TechChallenge1WalkthroughSection = dynamic(
+  () =>
+    import("@/components/projects/tech/TechChallenge1Walkthrough").then(
+      (mod) => mod.TechChallenge1WalkthroughSection,
+    ),
+  { ssr: false, loading: () => null },
+);
+const TechChallenge2WalkthroughSection = dynamic(
+  () =>
+    import("@/components/projects/tech/TechChallenge2Walkthrough").then(
+      (mod) => mod.TechChallenge2WalkthroughSection,
+    ),
+  { ssr: false, loading: () => null },
+);
+const TechChallenge3WalkthroughSection = dynamic(
+  () =>
+    import("@/components/projects/tech/TechChallenge3Walkthrough").then(
+      (mod) => mod.TechChallenge3WalkthroughSection,
+    ),
+  { ssr: false, loading: () => null },
+);
+const MultimodalClinicalWalkthroughSection = dynamic(
+  () =>
+    import("@/components/projects/clinical/MultimodalClinicalWalkthrough").then(
+      (mod) => mod.MultimodalClinicalWalkthroughSection,
+    ),
+  { ssr: false, loading: () => null },
+);
 
 export type ProjectArticleLabels = {
   problem: string;
@@ -147,12 +174,12 @@ export function ProjectArticle({
           <div className="min-w-0 flex-1">
             {project.logo ? (
               <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={project.logo.src}
                   alt=""
                   width={240}
                   height={52}
+                  sizes="(max-width: 768px) 65vw, 240px"
                   aria-hidden
                   className="h-12 w-auto max-w-[min(100%,16rem)] shrink-0 object-contain object-left dark:brightness-0 dark:invert"
                 />
@@ -178,7 +205,7 @@ export function ProjectArticle({
             aria-expanded={expanded}
             aria-controls={panelId}
             onClick={() => setExpanded((v) => !v)}
-            className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-line-subtle bg-bg-surface px-4 py-2.5 text-xs font-semibold text-fg-primary transition-colors duration-fast hover:border-fg-muted"
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-black bg-black px-4 py-2.5 text-xs font-semibold text-white transition-opacity duration-fast hover:opacity-90 dark:border-white dark:bg-white dark:text-black dark:hover:opacity-90"
           >
             <span>{expanded ? labels.collapseCaseStudy : labels.expandCaseStudy}</span>
             <svg

@@ -2,8 +2,10 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "@/config/navigation";
+import { isLocaleHomePath } from "@/lib/navHome";
 import type { Locale } from "@/lib/i18n";
 
 type MobileMenuProps = {
@@ -19,6 +21,18 @@ export function MobileMenu({
   locale,
   dictionary,
 }: MobileMenuProps) {
+  const pathname = usePathname();
+
+  function onHomeNavClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (!pathname || !isLocaleHomePath(pathname, locale)) return;
+    e.preventDefault();
+    const home = `/${locale}`;
+    if (typeof window !== "undefined" && window.location.hash) {
+      window.history.replaceState(null, "", home);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -39,7 +53,7 @@ export function MobileMenu({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-bg-primary/60 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-bg-primary/70"
             onClick={onClose}
             aria-hidden="true"
           />
@@ -78,7 +92,12 @@ export function MobileMenu({
                 <li key={item.key}>
                   <Link
                     href={`/${locale}${item.href}`}
-                    onClick={onClose}
+                    onClick={(e) => {
+                      if (item.href === "") {
+                        onHomeNavClick(e);
+                      }
+                      onClose();
+                    }}
                     className="block rounded-lg px-4 py-3 text-lg font-medium text-fg-primary transition-colors hover:bg-bg-surface"
                   >
                     {dictionary.nav[item.key.split(".")[1]]}

@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+/**
+ * 404 global: `href="/"` passa pelo middleware e redireciona para `/{locale}` (cookie / Accept-Language).
+ * `Link` integra com o App Router; `<a href="/pt">` podia falhar ou ignorar o locale em inglês.
+ */
 export default function NotFound() {
   return (
     <main className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
@@ -13,7 +17,7 @@ export default function NotFound() {
         O endereço que você tentou acessar não existe ou foi movido.
       </p>
       <Link
-        href="/pt"
+        href="/"
         className="mt-8 inline-block rounded-lg bg-accent-primary px-6 py-3 text-sm font-semibold text-accent-contrast transition-opacity hover:opacity-90"
       >
         Voltar ao início

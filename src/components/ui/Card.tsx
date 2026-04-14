@@ -1,7 +1,4 @@
-"use client";
-
-import { motion, type HTMLMotionProps } from "framer-motion";
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 type CardVariant = "surface" | "outline";
 
@@ -10,7 +7,7 @@ type CardProps = {
   hover?: boolean;
   children: ReactNode;
   className?: string;
-} & Omit<HTMLMotionProps<"div">, "children" | "className">;
+} & Omit<ComponentPropsWithoutRef<"div">, "children" | "className">;
 
 const variantStyles: Record<CardVariant, string> = {
   surface: "premium-card",
@@ -22,15 +19,14 @@ export function Card({
   hover = false,
   children,
   className = "",
-  ...motionProps
+  ...props
 }: CardProps) {
   return (
-    <motion.div
-      whileHover={hover ? { y: -4, transition: { duration: 0.18 } } : undefined}
-      className={`${variantStyles[variant]} ${className}`.trim()}
-      {...motionProps}
+    <div
+      className={`${variantStyles[variant]} ${hover ? "transition-transform duration-base ease-premium hover:-translate-y-1" : ""} ${className}`.trim()}
+      {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

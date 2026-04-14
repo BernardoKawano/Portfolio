@@ -2,16 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
+import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
+import { LOCALE_CODES } from "@/lib/locale-codes";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
   params: { locale: string };
 };
 
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+export function generateStaticParams() {
+  return LOCALE_CODES.map((locale) => ({ locale }));
 }
+
+/** Só `pt` e `en` existem em build estático; outras URLs caem em `notFound()`. */
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,

@@ -284,7 +284,7 @@ function ObraScene({ o }: { o: LumaGestorWalkthroughLabels["obra"] }) {
     const n = rows.length;
     const t = setInterval(() => setHighlight((h) => (h + 1) % n), 1400);
     return () => clearInterval(t);
-  }, []);
+  }, [rows.length]);
 
   return (
     <DemoWindowChrome title={o.chrome}>
