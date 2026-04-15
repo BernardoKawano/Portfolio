@@ -12,11 +12,12 @@ import {
   SquareTerminal,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 const STAGE_MIN_H =
   "min-h-[26rem] h-[26rem] sm:min-h-[30rem] sm:h-[30rem] lg:min-h-[32rem] lg:h-[32rem]";
 
-const AUTOPLAY_MS = 5200;
+const AUTOPLAY_MS = demoTiming.autoplay.defaultSceneMs;
 
 export type TechChallenge3WalkthroughLabels = {
   sectionTitle: string;
@@ -131,7 +132,10 @@ function GraphScene({ g }: { g: TechChallenge3WalkthroughLabels["graph"] }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setActive((v) => (v + 1) % nodes.length), 900);
+    const t = setInterval(
+      () => setActive((v) => (v + 1) % nodes.length),
+      demoTiming.intervals.tech3GraphNodeMs
+    );
     return () => clearInterval(t);
   }, [nodes.length]);
 

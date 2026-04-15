@@ -17,6 +17,7 @@ import {
   Upload,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 export type LumaAnalysisDemoLabels = {
   chrome: string;
@@ -133,7 +134,7 @@ export type LumaProductDemosLabels = {
   calendar: LumaCalendarDemoLabels;
 };
 
-const LUMA_LECTOR_AUTOPLAY_MS = 8000;
+const LUMA_LECTOR_AUTOPLAY_MS = demoTiming.autoplay.lumaLectorSceneMs;
 
 /** r = receita (verde), x = despesa (vermelho); um dia pode ter ambos */
 const calendarDays = [
@@ -148,7 +149,7 @@ const calendarDays = [
 const DEMO_STAGE_MIN_H =
   "min-h-[32rem] h-[32rem] sm:min-h-[38rem] sm:h-[38rem] lg:min-h-[42rem] lg:h-[42rem]";
 
-const ANALYSIS_DURATIONS_MS = [2600, 2400, 2800, 2600, 5800] as const;
+const ANALYSIS_DURATIONS_MS = demoTiming.durations.analysisStepMs;
 
 function DemoWindowChrome({
   title,
@@ -196,8 +197,11 @@ function AnalysisDemo({ labels }: { labels: LumaAnalysisDemoLabels }) {
     const tabLen = labels.tabs.length || 1;
     const tabTimer = setInterval(() => {
       setActiveTab((v) => (v + 1) % tabLen);
-    }, 1600);
-    const toastTimer = setTimeout(() => setShowToast(true), 2200);
+    }, demoTiming.intervals.analysisTabMs);
+    const toastTimer = setTimeout(
+      () => setShowToast(true),
+      demoTiming.timeouts.analysisToastMs
+    );
     return () => {
       clearInterval(tabTimer);
       clearTimeout(toastTimer);
@@ -525,7 +529,7 @@ function CalendarDemo({ labels }: { labels: LumaCalendarDemoLabels }) {
 
   useEffect(() => {
     /** Índices 0–3: vista → formulário → resumo “salvo” → livro-caixa (último com fases internas). */
-    const durations = [3800, 3200, 3000, 14000] as const;
+    const durations = demoTiming.durations.calendarStepMs;
     const timer = setTimeout(() => {
       setStep((prev) => (prev + 1) % nCal);
     }, durations[step] ?? 3200);
@@ -538,8 +542,14 @@ function CalendarDemo({ labels }: { labels: LumaCalendarDemoLabels }) {
       return;
     }
     setBookPhase(0);
-    const t1 = setTimeout(() => setBookPhase(1), 2600);
-    const t2 = setTimeout(() => setBookPhase(2), 7200);
+    const t1 = setTimeout(
+      () => setBookPhase(1),
+      demoTiming.timeouts.calendarBookPhase1Ms
+    );
+    const t2 = setTimeout(
+      () => setBookPhase(2),
+      demoTiming.timeouts.calendarBookPhase2Ms
+    );
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);

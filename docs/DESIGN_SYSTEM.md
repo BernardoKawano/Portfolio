@@ -53,6 +53,16 @@ All radii are registered in `tailwind.config.ts` under `borderRadius`.
 - `line.subtle`: `#e8e8e8`
 - `accent.primary`: `#0f172a`
 - `accent.contrast`: `#ffffff`
+- `gray.50`: `#f9f9f8`
+- `gray.100`: `#f0f0ef`
+- `gray.200`: `#e2e2e1`
+- `gray.300`: `#c8c8c7`
+- `gray.400`: `#a6a6a5`
+- `gray.500`: `#7f7f7e`
+- `gray.600`: `#656564`
+- `gray.700`: `#494949`
+- `gray.800`: `#2f2f2f`
+- `gray.900`: `#1a1a1a`
 
 ### Dark
 - `bg.primary`: `#0e0f12`
@@ -63,6 +73,18 @@ All radii are registered in `tailwind.config.ts` under `borderRadius`.
 - `line.subtle`: `#2a2c31`
 - `accent.primary`: `#f3f4f6`
 - `accent.contrast`: `#101215`
+- `gray.50`: `#f4f4f4`
+- `gray.100`: `#d8d9dc`
+- `gray.200`: `#bec0c5`
+- `gray.300`: `#a2a5ad`
+- `gray.400`: `#878b95`
+- `gray.500`: `#6f747f`
+- `gray.600`: `#575d69`
+- `gray.700`: `#434955`
+- `gray.800`: `#2f343f`
+- `gray.900`: `#1f232b`
+
+Gray tokens must be preferred for subtle hierarchy in dark surfaces (secondary separators, tertiary labels, and low-emphasis metadata), while semantic tokens (`fg.*`, `line.*`, `bg.*`) remain the default for primary UI states.
 
 ## Shadows
 - `shadow.card`: `0 10px 30px rgba(0, 0, 0, 0.06)` (light)

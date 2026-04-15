@@ -4,6 +4,7 @@ import { ptMessages } from "@/i18n/messages/pt";
 import { getDictionary } from "@/lib/i18n";
 import {
   projects,
+  richTextToPlainText,
   resolveProjectCopy,
   type ProjectLocaleItems,
 } from "@/content/projects";
@@ -15,8 +16,8 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(luma!, items);
-    expect(copy.summary.toLowerCase()).toContain("pdf");
-    expect(copy.impact).toMatch(/2|40|horas/i);
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toContain("pdf");
+    expect(richTextToPlainText(copy.impact)).toMatch(/2|40|horas/i);
     expect(copy.wordmark).toBe("Luma Lector");
   });
 
@@ -25,8 +26,8 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(luma!, items);
-    expect(copy.summary.toLowerCase()).toMatch(/pdf|financial/);
-    expect(copy.impact.toLowerCase()).toMatch(/2|40|hour/);
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toMatch(/pdf|financial/);
+    expect(richTextToPlainText(copy.impact).toLowerCase()).toMatch(/2|40|hour/);
   });
 
   it("returns Portuguese copy for Luma Gestor from pt dictionary items", () => {
@@ -35,10 +36,10 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("pt").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(gestor!, items);
-    expect(copy.summary.toLowerCase()).toMatch(/kanban|pdf|obra/);
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toMatch(/kanban|pdf|obra/);
     expect(copy.wordmark).toBe("Luma Gestor");
     expect(copy.architecture.toLowerCase()).toContain("vite");
-    expect(copy.details?.length).toBeGreaterThan(100);
+    expect(richTextToPlainText(copy.details).length).toBeGreaterThan(100);
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(2);
   });
 
@@ -47,7 +48,7 @@ describe("resolveProjectCopy", () => {
     const items = getDictionary("en").projects
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(gestor!, items);
-    expect(copy.summary.toLowerCase()).toMatch(/kanban|pdf|project/);
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toMatch(/kanban|pdf|project/);
     expect(copy.architecture.toLowerCase()).toContain("vite");
   });
 
@@ -58,7 +59,7 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("rotas medicas");
-    expect(copy.summary.toLowerCase()).toContain("algoritmo genetico");
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toContain("algoritmo genetico");
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
   });
 
@@ -69,8 +70,8 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("câncer de mama");
-    expect(copy.solution.toLowerCase()).toContain("gridsearchcv");
-    expect(copy.impact.toLowerCase()).toContain("triagem");
+    expect(richTextToPlainText(copy.solution).toLowerCase()).toContain("gridsearchcv");
+    expect(richTextToPlainText(copy.impact).toLowerCase()).toContain("triagem");
   });
 
   it("returns English copy for Tech Challenge 1 from en dictionary items", () => {
@@ -80,7 +81,7 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("breast cancer");
-    expect(copy.process.toLowerCase()).toContain("eda");
+    expect(richTextToPlainText(copy.process).toLowerCase()).toContain("eda");
   });
 
   it("exposes Tech Challenge 1 walkthrough labels in pt and en", () => {
@@ -107,7 +108,7 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("route optimization");
-    expect(copy.process.toLowerCase()).toContain("folium");
+    expect(richTextToPlainText(copy.process).toLowerCase()).toContain("folium");
   });
 
   it("exposes Luma Gestor walkthrough labels in pt and en", () => {
@@ -145,8 +146,8 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("clinguard");
-    expect(copy.summary.toLowerCase()).toContain("guardrails");
-    expect(copy.impact.toLowerCase()).toContain("copiloto");
+    expect(richTextToPlainText(copy.summary).toLowerCase()).toContain("guardrails");
+    expect(richTextToPlainText(copy.impact).toLowerCase()).toContain("copiloto");
   });
 
   it("returns English copy for Tech Challenge 3 from en dictionary items", () => {
@@ -156,7 +157,7 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("enterprise solution");
-    expect(copy.process.toLowerCase()).toContain("qlora");
+    expect(richTextToPlainText(copy.process).toLowerCase()).toContain("qlora");
   });
 
   it("keeps external links configured for Tech Challenge 3", () => {
@@ -176,8 +177,8 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("medwatch");
-    expect(copy.solution.toLowerCase()).toContain("langgraph");
-    expect(copy.impact.toLowerCase()).toContain("video");
+    expect(richTextToPlainText(copy.solution).toLowerCase()).toContain("langgraph");
+    expect(richTextToPlainText(copy.impact).toLowerCase()).toContain("video");
     expect(copy.attributions?.length).toBeGreaterThanOrEqual(4);
   });
 
@@ -188,7 +189,7 @@ describe("resolveProjectCopy", () => {
       .items as ProjectLocaleItems;
     const copy = resolveProjectCopy(project!, items);
     expect(copy.title.toLowerCase()).toContain("medwatch");
-    expect(copy.process.toLowerCase()).toContain("autoencoders");
+    expect(richTextToPlainText(copy.process).toLowerCase()).toContain("autoencoders");
     expect(copy.architecture.toLowerCase()).toContain("langgraph");
   });
 

@@ -86,10 +86,16 @@ export const enMessages = {
       lumalector: {
         title: "LumaLector",
         wordmark: "Luma Lector",
-        summary:
-          "Web frontend for automated analysis of financial statement PDFs, financial control, calendar, reports, and conversion to RSDT (.241) files, integrated with a FastAPI backend.",
-        impact:
-          "Roughly 2 hours of manual work removed each business day — about 40 hours reclaimed per month.",
+        summary: [
+          { text: "Web frontend for " },
+          { text: "automated analysis", strong: true },
+          { text: " of financial statement PDFs, financial control, calendar, reports, and conversion to RSDT (.241) files, integrated with a FastAPI backend." },
+        ],
+        impact: [
+          { text: "Roughly " },
+          { text: "2 hours of manual work removed each business day", strong: true },
+          { text: " — about 40 hours reclaimed per month." },
+        ],
         problem:
           "PDF statements and financial control work often mean manual effort, exports, and tax-calendar alignment without a single web workflow.",
         solution:
@@ -102,10 +108,16 @@ export const enMessages = {
       lumagestor: {
         title: "LumaGestor",
         wordmark: "Luma Gestor",
-        summary:
-          "SPA for construction financial management: payment requests with a professional PDF, a Kanban for status (Generated, Sent, Paid), and a per-project dashboard tied to Google Drive and Google Sheets — no loose spreadsheets.",
-        impact:
-          "One web flow to request, track, and consolidate by project; marking paid pushes the amount into the tracking sheet without retyping.",
+        summary: [
+          { text: "SPA for construction financial management with " },
+          { text: "payment requests and professional PDF output", strong: true },
+          { text: ", a Kanban for status (Generated, Sent, Paid), and a per-project dashboard tied to Google Drive and Google Sheets — no loose spreadsheets." },
+        ],
+        impact: [
+          { text: "One web flow to request, track, and consolidate by project; marking paid pushes the amount into the tracking sheet " },
+          { text: "without retyping", strong: true },
+          { text: "." },
+        ],
         problem:
           "Site teams often scatter requests, receipts, and totals across files and spreadsheets, without a single view of what was generated, sent, or paid, or of balances per project.",
         solution:
@@ -137,8 +149,11 @@ export const enMessages = {
       "tech-challenge-1": {
         title: "OncoClass AI - Breast Cancer Diagnostic Support",
         wordmark: "OncoClass AI",
-        summary:
-          "Machine learning pipeline for binary classification (benign vs malignant) with EDA, preprocessing, comparative training (Logistic Regression, Random Forest, and KNN), and automated reporting.",
+        summary: [
+          { text: "Machine learning pipeline for binary classification (benign vs malignant) with EDA, preprocessing, comparative training (Logistic Regression, Random Forest, and KNN), and " },
+          { text: "automated reporting", strong: true },
+          { text: "." },
+        ],
         impact:
           "Breast cancer triage project built to catch malignant cases in the first screening step; on test data, Logistic Regression reached 0.976 recall, lowering false-negative risk and improving early clinical decision support.",
         problem:
@@ -163,8 +178,11 @@ export const enMessages = {
       },
       "tech-challenge-2": {
         title: "Rota VRP (Vehicle Routing Problem) - Medical Route Optimization",
-        summary:
-          "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, real-time web visualization, interactive Folium maps, and optional local LLM support via Ollama.",
+        summary: [
+          { text: "A route optimization system for medical-supplies distribution in Sao Paulo that uses a genetic algorithm with priority, capacity, and range constraints, " },
+          { text: "real-time web visualization", strong: true },
+          { text: ", interactive Folium maps, and optional local LLM support via Ollama." },
+        ],
         impact:
           "Routes prioritize critical deliveries while balancing vehicle capacity and range; operations gain clearer visibility through interactive maps and per-run reports.",
         problem:
@@ -198,8 +216,11 @@ export const enMessages = {
       },
       "tech-challenge-3": {
         title: "Safe Clinical Copilot - Enterprise Solution",
-        summary:
-          "A clinical copilot for educational support that generates contextualized responses, applies safety guardrails, and keeps an audit trail, with a web visual simulator to demonstrate the flow.",
+        summary: [
+          { text: "A clinical copilot for educational support that generates contextualized responses, applies " },
+          { text: "safety guardrails", strong: true },
+          { text: ", and keeps an audit trail, with a web visual simulator to demonstrate the flow." },
+        ],
         impact:
           "Question, guardrail, and audit flow makes each response traceable and safer for educational use; it reinforces responsible AI in healthcare without replacing clinical decisions.",
         problem:
@@ -229,8 +250,11 @@ export const enMessages = {
       "multimodal-clinical-monitoring": {
         title: "MedWatch AI System",
         wordmark: "MedWatch AI",
-        summary:
-          "A multimodal AI system for clinical monitoring that processes surgical video, audio, and text, performs LangGraph-based fusion, and generates reports and alerts for medical-team support.",
+        summary: [
+          { text: "A multimodal AI system for clinical monitoring that processes surgical video, audio, and text, performs LangGraph-based fusion, and " },
+          { text: "generates reports and alerts", strong: true },
+          { text: " for medical-team support." },
+        ],
         impact:
           "Video, audio, and text signals are consolidated in a single flow with contextual alerts; teams gain faster triage and stronger clinical observability.",
         problem:

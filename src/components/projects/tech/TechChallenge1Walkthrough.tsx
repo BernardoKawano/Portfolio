@@ -4,11 +4,12 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BarChart3, Database, Pause, Play, Sparkles, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 const STAGE_MIN_H =
   "min-h-[26rem] h-[26rem] sm:min-h-[30rem] sm:h-[30rem] lg:min-h-[32rem] lg:h-[32rem]";
 
-const AUTOPLAY_MS = 5200;
+const AUTOPLAY_MS = demoTiming.autoplay.defaultSceneMs;
 
 function metricValue(label: string): string {
   const m = label.match(/([0-9]+\.[0-9]+)/);

@@ -86,10 +86,16 @@ export const ptMessages = {
       lumalector: {
         title: "LumaLector",
         wordmark: "Luma Lector",
-        summary:
-          "Frontend web para analise automatica de demonstrativos financeiros em PDF, controlo financeiro, calendario, relatorios e conversao para ficheiros RSDT (.241), integrado a uma API FastAPI.",
-        impact:
-          "Cerca de 2 horas de trabalho manual evitadas por dia útil — em média, ~40 horas recuperadas por mês.",
+        summary: [
+          { text: "Frontend web para " },
+          { text: "analise automatica", strong: true },
+          { text: " de demonstrativos financeiros em PDF, controlo financeiro, calendario, relatorios e conversao para ficheiros RSDT (.241), integrado a uma API FastAPI." },
+        ],
+        impact: [
+          { text: "Cerca de " },
+          { text: "2 horas de trabalho manual evitadas por dia util", strong: true },
+          { text: " — em media, ~40 horas recuperadas por mes." },
+        ],
         problem:
           "Demonstrativos em PDF e tarefas de controlo financeiro costumam exigir trabalho manual, exportacoes e alinhamento com calendario fiscal sem um unico fluxo web.",
         solution:
@@ -102,10 +108,16 @@ export const ptMessages = {
       lumagestor: {
         title: "LumaGestor",
         wordmark: "Luma Gestor",
-        summary:
-          "SPA de gestao financeira de obras: solicitacoes de pagamento com PDF profissional, Kanban de status (Gerada, Enviada, Paga) e painel por obra ligado a Google Drive e Google Sheets — sem planilhas soltas.",
-        impact:
-          "Um unico fluxo web para solicitar, acompanhar e consolidar por obra; ao marcar paga, o valor entra na planilha de acompanhamento sem re-digitacao.",
+        summary: [
+          { text: "SPA de gestao financeira de obras com " },
+          { text: "solicitacoes de pagamento com PDF profissional", strong: true },
+          { text: ", Kanban de status (Gerada, Enviada, Paga) e painel por obra ligado a Google Drive e Google Sheets — sem planilhas soltas." },
+        ],
+        impact: [
+          { text: "Um unico fluxo web para solicitar, acompanhar e consolidar por obra; ao marcar paga, o valor entra na planilha de acompanhamento " },
+          { text: "sem re-digitacao", strong: true },
+          { text: "." },
+        ],
         problem:
           "Equipas de obra costumam espalhar pedidos, comprovativos e totais entre ficheiros e planilhas, sem visao unificada do que foi gerado, enviado ou pago nem do saldo por obra.",
         solution:
@@ -137,8 +149,11 @@ export const ptMessages = {
       "tech-challenge-1": {
         title: "OncoClass AI - Suporte a Diagnóstico de Câncer de Mama",
         wordmark: "OncoClass AI",
-        summary:
-          "Pipeline de machine learning para classificação binária (benigno vs maligno) com EDA, pré-processamento, treino comparativo (Logistic Regression, Random Forest e KNN) e geração automática de relatórios.",
+        summary: [
+          { text: "Pipeline de machine learning para classificacao binaria (benigno vs maligno) com EDA, pre-processamento, treino comparativo (Logistic Regression, Random Forest e KNN) e " },
+          { text: "geracao automatica de relatorios", strong: true },
+          { text: "." },
+        ],
         impact:
           "Projeto de triagem para cancer de mama que prioriza detectar casos malignos na primeira avaliacao, reduzindo risco de falso negativo e fortalecendo o apoio a decisao clinica inicial.",
         problem:
@@ -163,8 +178,11 @@ export const ptMessages = {
       },
       "tech-challenge-2": {
         title: "Rota VRP (Vehicle Routing Problem) - Otimizacao de Rotas Medicas",
-        summary:
-          "Sistema de otimizacao de rotas para distribuicao de suprimentos medicos em Sao Paulo, usando algoritmo genetico com restricoes de prioridade, capacidade e autonomia, visualizacao web em tempo real, mapas interativos com Folium e camada opcional de LLM local via Ollama.",
+        summary: [
+          { text: "Sistema de otimizacao de rotas para distribuicao de suprimentos medicos em Sao Paulo, usando algoritmo genetico com restricoes de prioridade, capacidade e autonomia, " },
+          { text: "visualizacao web em tempo real", strong: true },
+          { text: ", mapas interativos com Folium e camada opcional de LLM local via Ollama." },
+        ],
         impact:
           "Rotas priorizam entregas criticas e equilibram capacidade e autonomia dos veiculos; a operacao ganha visibilidade com mapa interativo e relatorio por rodada.",
         problem:
@@ -198,8 +216,11 @@ export const ptMessages = {
       },
       "tech-challenge-3": {
         title: "ClinGuard AI",
-        summary:
-          "Copiloto clinico para apoio educacional que gera respostas contextualizadas, aplica guardrails de seguranca e registra trilha de auditoria, com simulador visual web para demonstracao do fluxo.",
+        summary: [
+          { text: "Copiloto clinico para apoio educacional que gera respostas contextualizadas, aplica " },
+          { text: "guardrails de seguranca", strong: true },
+          { text: " e registra trilha de auditoria, com simulador visual web para demonstracao do fluxo." },
+        ],
         impact:
           "Chat copiloto para medicos e equipes clinicas, treinado com mais de 900 conteudos medicos, com respostas contextualizadas, guardrails de seguranca e trilha de auditoria para acelerar decisoes com mais confianca e padronizacao.",
         problem:
@@ -230,8 +251,11 @@ export const ptMessages = {
       "multimodal-clinical-monitoring": {
         title: "Sistema MedWatch AI",
         wordmark: "MedWatch AI",
-        summary:
-          "Sistema multimodal de IA para monitoramento clinico que processa video cirurgico, audio e texto, faz fusao com LangGraph e gera relatorios e alertas para apoio a equipe medica.",
+        summary: [
+          { text: "Sistema multimodal de IA para monitoramento clinico que processa video cirurgico, audio e texto, faz fusao com LangGraph e " },
+          { text: "gera relatorios e alertas", strong: true },
+          { text: " para apoio a equipe medica." },
+        ],
         impact:
           "O sistema junta video, audio e texto em um so lugar e avisa quando identifica sinais de piora do paciente ou possiveis complicacoes no procedimento. Assim, a equipe atende mais rapido e acompanha melhor cada caso.",
         problem:

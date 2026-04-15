@@ -11,6 +11,7 @@ import type { TechChallenge1WalkthroughLabels } from "@/components/projects/tech
 import type { TechChallenge2WalkthroughLabels } from "@/components/projects/tech/TechChallenge2Walkthrough";
 import type { TechChallenge3WalkthroughLabels } from "@/components/projects/tech/TechChallenge3Walkthrough";
 import type { MultimodalClinicalWalkthroughLabels } from "@/components/projects/clinical/MultimodalClinicalWalkthrough";
+import { InlineRichText } from "@/components/ui/InlineRichText";
 
 const LumaGestorWalkthroughSection = dynamic(
   () =>
@@ -114,11 +115,16 @@ export function ProjectArticle({
   const showStackKeys = expanded
     ? project.stack.map((item) => ({ item, core: core.includes(item) }))
     : core.map((item) => ({ item, core: true }));
+  const logoDarkClass =
+    project.id === "lumagestor" || project.id === "lumalector"
+      ? "dark:[filter:invert(1)_hue-rotate(180deg)_saturate(1.08)]"
+      : "";
 
   const impactLinks = (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <p className="text-caption font-semibold">
-        <span className="text-fg-muted">{labels.impact}:</span> {copy.impact}
+        <span className="text-fg-muted">{labels.impact}:</span>{" "}
+        <InlineRichText value={copy.impact} />
       </p>
       <div className="flex flex-wrap gap-3">
         {project.privateRepo ? (
@@ -174,15 +180,17 @@ export function ProjectArticle({
           <div className="min-w-0 flex-1">
             {project.logo ? (
               <>
-                <Image
-                  src={project.logo.src}
-                  alt=""
-                  width={240}
-                  height={52}
-                  sizes="(max-width: 768px) 65vw, 240px"
-                  aria-hidden
-                  className="h-12 w-auto max-w-[min(100%,16rem)] shrink-0 object-contain object-left dark:brightness-0 dark:invert"
-                />
+                <div className="inline-flex">
+                  <Image
+                    src={project.logo.src}
+                    alt=""
+                    width={240}
+                    height={52}
+                    sizes="(max-width: 768px) 65vw, 240px"
+                    aria-hidden
+                    className={`h-12 w-auto max-w-[min(100%,16rem)] shrink-0 object-contain object-left ${logoDarkClass}`}
+                  />
+                </div>
                 {expanded ? (
                   <h2 className="sr-only">
                     {copy.wordmark
@@ -227,7 +235,7 @@ export function ProjectArticle({
         <p
           className={`mt-3 max-w-3xl text-body text-fg-secondary ${expanded ? "" : "line-clamp-2"}`}
         >
-          {copy.summary}
+          <InlineRichText value={copy.summary} />
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {showStackKeys.map(({ item, core: isCore }) => (
@@ -259,13 +267,17 @@ export function ProjectArticle({
               <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
                 {labels.problem}
               </h3>
-              <p className="mt-3 text-caption text-fg-secondary">{copy.problem}</p>
+              <p className="mt-3 text-caption text-fg-secondary">
+                <InlineRichText value={copy.problem} />
+              </p>
             </div>
             <div className="bg-bg-surface p-6 md:p-7">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
                 {labels.solution}
               </h3>
-              <p className="mt-3 text-caption text-fg-secondary">{copy.solution}</p>
+              <p className="mt-3 text-caption text-fg-secondary">
+                <InlineRichText value={copy.solution} />
+              </p>
             </div>
             <div className="bg-bg-surface p-6 md:p-7">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
@@ -279,7 +291,9 @@ export function ProjectArticle({
               <h3 className="text-xs font-semibold uppercase tracking-widest text-fg-muted">
                 {labels.process}
               </h3>
-              <p className="mt-3 text-caption text-fg-secondary">{copy.process}</p>
+              <p className="mt-3 text-caption text-fg-secondary">
+                <InlineRichText value={copy.process} />
+              </p>
             </div>
           </div>
           {copy.details ? (
@@ -288,7 +302,7 @@ export function ProjectArticle({
                 {labels.detailsHeading ?? "Detalhes"}
               </h3>
               <p className="mt-4 max-w-3xl whitespace-pre-wrap text-caption leading-relaxed text-fg-secondary">
-                {copy.details}
+                <InlineRichText value={copy.details} />
               </p>
             </div>
           ) : null}

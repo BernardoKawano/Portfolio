@@ -14,11 +14,12 @@ import {
   Table2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 const STAGE_MIN_H =
   "min-h-[26rem] h-[26rem] sm:min-h-[30rem] sm:h-[30rem] lg:min-h-[32rem] lg:h-[32rem]";
 
-const SCENE_MS = 5200;
+const SCENE_MS = demoTiming.autoplay.defaultSceneMs;
 
 export type LumaGestorWalkthroughLabels = {
   sectionTitle: string;
@@ -109,7 +110,10 @@ function WizardScene({ w }: { w: LumaGestorWalkthroughLabels["wizard"] }) {
   const steps = [w.step1, w.step2, w.step3] as const;
 
   useEffect(() => {
-    const t = setInterval(() => setStep((s) => (s + 1) % 3), 1700);
+    const t = setInterval(
+      () => setStep((s) => (s + 1) % 3),
+      demoTiming.intervals.wizardStepMs
+    );
     return () => clearInterval(t);
   }, []);
 
@@ -214,7 +218,10 @@ function KanbanScene({ k }: { k: LumaGestorWalkthroughLabels["kanban"] }) {
   const [col, setCol] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setCol((c) => (c + 1) % 3), 1600);
+    const t = setInterval(
+      () => setCol((c) => (c + 1) % 3),
+      demoTiming.intervals.kanbanShiftMs
+    );
     return () => clearInterval(t);
   }, []);
 
@@ -282,7 +289,10 @@ function ObraScene({ o }: { o: LumaGestorWalkthroughLabels["obra"] }) {
 
   useEffect(() => {
     const n = rows.length;
-    const t = setInterval(() => setHighlight((h) => (h + 1) % n), 1400);
+    const t = setInterval(
+      () => setHighlight((h) => (h + 1) % n),
+      demoTiming.intervals.obraHighlightMs
+    );
     return () => clearInterval(t);
   }, [rows.length]);
 

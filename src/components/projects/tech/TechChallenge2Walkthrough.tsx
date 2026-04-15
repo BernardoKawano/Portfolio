@@ -15,11 +15,12 @@ import {
   Truck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 const STAGE_MIN_H =
   "min-h-[26rem] h-[26rem] sm:min-h-[30rem] sm:h-[30rem] lg:min-h-[32rem] lg:h-[32rem]";
 
-const AUTOPLAY_MS = 5200;
+const AUTOPLAY_MS = demoTiming.autoplay.defaultSceneMs;
 
 const VEHICLE_COLORS = ["#2563EB", "#059669", "#D97706"] as const;
 
@@ -161,12 +162,15 @@ function LiveScene({ l }: { l: TechChallenge2WalkthroughLabels["live"] }) {
   useEffect(() => {
     const t = setInterval(() => {
       setProgress((p) => (p >= 96 ? 22 : p + 12));
-    }, 850);
+    }, demoTiming.intervals.tech2ProgressMs);
     return () => clearInterval(t);
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => setTick((v) => (v + 1) % 30), 420);
+    const t = setInterval(
+      () => setTick((v) => (v + 1) % 30),
+      demoTiming.intervals.tech2TickMs
+    );
     return () => clearInterval(t);
   }, []);
 
@@ -331,7 +335,10 @@ function MapScene({ m }: { m: TechChallenge2WalkthroughLabels["map"] }) {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setStep((s) => (s + 1) % 14), 480);
+    const t = setInterval(
+      () => setStep((s) => (s + 1) % 14),
+      demoTiming.intervals.tech2MapStepMs
+    );
     return () => clearInterval(t);
   }, []);
 

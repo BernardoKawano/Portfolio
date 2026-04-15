@@ -4,10 +4,11 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Activity, Pause, Play, Siren, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { demoTiming } from "@/config/demoTiming";
 
 const STAGE_MIN_H =
   "min-h-[24rem] h-[24rem] sm:min-h-[28rem] sm:h-[28rem] lg:min-h-[30rem] lg:h-[30rem]";
-const AUTOPLAY_MS = 5200;
+const AUTOPLAY_MS = demoTiming.autoplay.defaultSceneMs;
 
 export type MultimodalClinicalWalkthroughLabels = {
   sectionTitle: string;
@@ -104,7 +105,10 @@ function PipelineScene({ d }: { d: MultimodalClinicalWalkthroughLabels["pipeline
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setActive((v) => (v + 1) % d.nodes.length), 900);
+    const t = setInterval(
+      () => setActive((v) => (v + 1) % d.nodes.length),
+      demoTiming.intervals.clinicalPipelineNodeMs
+    );
     return () => clearInterval(t);
   }, [d.nodes.length]);
 

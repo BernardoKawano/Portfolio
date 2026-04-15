@@ -7,6 +7,7 @@ import {
   type ProjectLocaleItems,
 } from "@/content/projects";
 import { Card } from "@/components/ui/Card";
+import { InlineRichText } from "@/components/ui/InlineRichText";
 import type { Locale } from "@/lib/i18n";
 
 type FeaturedProjectsProps = {
@@ -55,6 +56,10 @@ export function FeaturedProjects({
                 : project.id === "multimodal-clinical-monitoring"
                   ? "scale-[1.28]"
                 : "scale-95";
+          const logoDarkClass =
+            project.id === "lumagestor" || project.id === "lumalector"
+              ? "dark:[filter:invert(1)_hue-rotate(180deg)_saturate(1.08)]"
+              : "";
           return (
             <Card key={project.id} hover className="flex flex-col p-6 md:p-7">
               {logo ? (
@@ -68,7 +73,7 @@ export function FeaturedProjects({
                       sizes="(max-width: 1280px) 45vw, 200px"
                       priority={featured[0]?.id === project.id}
                       aria-hidden
-                      className={`h-9 w-auto max-w-full shrink-0 origin-left object-contain object-left dark:brightness-0 dark:invert ${logoScaleClass}`}
+                      className={`h-9 w-auto max-w-full shrink-0 origin-left object-contain object-left ${logoScaleClass} ${logoDarkClass}`}
                     />
                   </div>
                   <h3 className="sr-only">
@@ -84,10 +89,10 @@ export function FeaturedProjects({
                 </>
               )}
               <p className="mt-5 text-caption font-medium text-fg-primary">
-                {copy.impact}
+                <InlineRichText value={copy.impact} />
               </p>
               <p className="mt-3 flex-1 text-caption leading-relaxed text-fg-secondary">
-                {copy.summary}
+                <InlineRichText value={copy.summary} />
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {visibleStack.map((item) => (

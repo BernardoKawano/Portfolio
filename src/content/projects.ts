@@ -3,18 +3,25 @@ export type ProjectAttribution = {
   credit: string;
 };
 
+export type RichTextSegment = {
+  text: string;
+  strong?: boolean;
+};
+
+export type RichText = string | readonly RichTextSegment[];
+
 export type ProjectCopy = {
   title: string;
   /** Wordmark next to the logo (e.g. "Luma Lector") */
   wordmark?: string;
-  summary: string;
-  impact: string;
-  problem: string;
-  solution: string;
+  summary: RichText;
+  impact: RichText;
+  problem: RichText;
+  solution: RichText;
   architecture: string;
-  process: string;
+  process: RichText;
   /** Texto longo no case study (âncora #id na página de projetos) */
-  details?: string;
+  details?: RichText;
   /** Papéis e créditos ligados ao projeto */
   attributions?: readonly ProjectAttribution[];
 };
@@ -64,6 +71,12 @@ export type ProjectLocaleItems = {
 
 export function isLocalizedProject(project: Project): project is LocalizedProject {
   return "localeKey" in project && Boolean(project.localeKey);
+}
+
+export function richTextToPlainText(value: RichText | undefined): string {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value.map((segment) => segment.text).join("");
 }
 
 export function resolveProjectCopy(
